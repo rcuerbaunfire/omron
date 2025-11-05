@@ -1,0 +1,84 @@
+<section class="{{ block.slug }} bg-{{ fields.bg }}">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xl" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xxl" %}
+
+	<div class="container">
+		<div class="{{ pt }} {{ pb }}">
+			<div class="flex flex-col ~gap-[2.25rem]/[3rem]">
+				<div class="flex max-md:flex-col gap-[1.5rem] justify-between md:items-end">
+					{% if fields.heading %}
+						<div class="flex-1 max-w-[39.25rem]">
+							{% include 'components/heading.twig' with {
+                                'class': 'main-title',
+                                'value': fields.heading.value, 
+                                'type': fields.heading.type != "default" ? fields.heading.type : "h3",
+                                'has_custom_style': fields.heading.has_custom_style,
+                                'style': fields.heading.style,
+                                'to_words': true
+                            } %}
+						</div>
+					{% endif %}
+
+					{% include 'components/cta.twig' with {
+                        'class' : 'filled blue shrink-0',
+                        'cta': fields.cta, 
+                        'icon': true,
+                    } %}
+				</div>
+
+				{% if fields.source == 'res-blogs' and fields.items_blog|length %}
+					<div class="items">
+						{% for index, item in fields.items_blog %}
+							{% set id = item.ID %}
+							{% set title = item.post_title %}
+							{% set post_date = item.post_date|date("n/j/Y") %}
+
+                            {% if function("get_language", true) != "English" %}
+                                {% set post_date = item.post_date|date("j/n/Y") %}
+                            {% endif %}
+
+							{% set image = function("get_blog_head_image", id) %}
+							{% set permalink = function("get_permalink", id) %}
+                            {% set post_type_name = function("get_post_type_translation", function("get_post_type", id)) %}
+
+							{% include 'components/blog-card.twig' with {
+                                "cardClass": "resource-three-feature",
+                                "title": title,
+                                "permalink": permalink,
+                                "image": image,
+                                "date": post_date,
+                                "eyebrow": post_type_name
+                            } %}
+						{% endfor %}
+					</div>
+				{% endif %}
+
+				{% if fields.source == 'res-manual' and fields.items|length %}
+					<div class="items">
+						{% for index, item in fields.items %}
+							{% set title = item.rtaf_items_title %}
+                            {% set eyebrow = item.eyebrow %}
+							{% set post_date = item.date %}
+							{% set image = item.image %}
+							{% set permalink = item.permalink ?: "#" %}
+
+							{% include 'components/blog-card.twig' with {
+                                "cardClass": "resource-three-feature",
+                                "title": title,
+                                "eyebrow": eyebrow,
+                                "date": post_date,
+                                "permalink": permalink,
+                                "image": image,
+                            } %}
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</section>
+

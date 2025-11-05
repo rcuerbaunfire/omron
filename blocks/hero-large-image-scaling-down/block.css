@@ -1,0 +1,33 @@
+@layer components {
+    .hero-large-image-scaling-down {
+		.media-container {
+			@apply rounded-[0.5rem] overflow-hidden relative ~h-[10rem]/[42.875rem];
+
+			&.video {
+                @apply bg-black;
+                /* @apply !pointer-events-none; */
+
+				iframe {
+                    @apply absolute center-xy h-full w-full aspect-video;
+                    /* @apply absolute center-xy h-auto w-full min-w-full min-h-[70rem] aspect-video; */
+                }
+			}
+		}
+
+        .video-box {
+            @apply absolute top-0 left-0 h-full w-full z-[2];
+        }
+
+        .video-thumbnail {
+            @apply absolute top-0 left-0 h-full w-full z-[3];
+
+            img {
+                @apply h-full w-full;
+            }
+        }
+
+        .video-play {
+            @apply rounded-[50%] h-[5.25rem] w-[5.25rem] overflow-hidden left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] absolute bg-black-60 cursor-pointer z-[4] flex items-center justify-center text-center;
+        }
+    }
+}

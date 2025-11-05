@@ -1,0 +1,11 @@
+{
+	"name": "content-financial-result",
+	"title": "Content Financial Result",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": ["bf-toastify-style", "bf-jquery-ui-style"],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page", "product"]
+	}
+}

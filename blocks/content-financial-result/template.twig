@@ -1,0 +1,157 @@
+<section class="{{ block.slug }} bg-{{ fields.bg }}">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	<div class="container relative z-[2]">
+		<div class="~pt-[7.25rem]/[8.25rem] sb-xl">
+			<div class="flex flex-col ~gap-[1.25rem]/[1.5rem] max-w-[48.375rem]">
+				{% if fields.heading %}
+					{% include 'components/heading.twig' with {
+                        'class': 'main-title',
+                        'value': fields.heading.value, 
+                        'type': fields.heading.type != "default" ? fields.heading.type : "h1",
+                        'has_custom_style': fields.heading.has_custom_style,
+                        'style': fields.heading.style,
+                        'to_words': true
+                    } %}
+				{% endif %}
+
+				{% if fields.paragraph %}
+					<p class="para-desc">{{ fields.paragraph }}</p>
+				{% endif %}
+			</div>
+		</div>
+
+		{% set robot_name = function('get_field', "robot_name", result_id) %}
+		{% set robot_image = function('get_field', "robot_image", result_id) %}
+		{% set robot_subtext = function('get_field', "robot_subtext", result_id) %}
+
+		<div class="graph-container sb-xxl">
+			<div class="graph-inner loading">
+				<div class="overlay"></div>
+
+				<div class="graph-contents">
+					<div class="flex max-md:flex-col justify-between md:items-end ~gap-[0.75rem]/[2rem]">
+						{% if robot_name %}
+							<div class="flex flex-col gap-[0.75rem]">
+								<p class="lg">{{ fields.selected_product_text }}</p>
+
+								<div class="robot-current">
+									{% if robot_image %}
+										{% include 'components/image.twig' with {
+                                            'image': robot_image,
+                                            'class': 'object-contain h-[5.3125rem] w-[5.3125rem] shrink-0',
+                                            'size': [85, 85],
+                                        } %}
+									{% else %}
+										<img class="object-contain h-[5.3125rem] w-[5.3125rem] shrink-0" src="{{ function("webp", "roi-robot-image") }}" loading="lazy" alt="{{ robot_name }}">
+									{% endif %}
+
+									<div class="flex-1 flex flex-col">
+										<p class="robot-name">{{ robot_name }}</p>
+
+										{% if robot_subtext %}
+											<p class="xs text-black-60">{{ robot_subtext }}</p>
+										{% endif %}
+									</div>
+								</div>
+							</div>
+						{% endif %}
+
+						<div class="share-btn">
+							<div class="btn filled blue has-arrow" type="button" href="{{ link_url }}" target="{{ link_target }}">
+								<svg width="13" height="13" viewbox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M8.55697 10.375L11.8486 6.94618L8.55697 3.51736" stroke="white" stroke-width="1.5" stroke-miterlimit="10"/>
+									<path d="M1.01411 0.500006L1.0141 5.84896C1.0141 6.45463 1.50566 6.94618 2.11133 6.94618L11.9863 6.94618" stroke="white" stroke-width="1.5" stroke-miterlimit="10"/>
+								</svg>
+
+								<p>{{ fields.share_button_text }}</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="flex flex-col ~gap-[1.25rem]/[1.5rem] st-lg">
+						<div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 ~gap-[1.25rem]/[1.5rem]">
+							<div class="stat blue" data-key="payback">
+								<div class="stat-inner">
+									<h2>
+										<span class="amount">0</span>
+										months</h2>
+									<p>{{ fields.stat_one_subtext }}</p>
+								</div>
+
+								<div class="orb absolute pointer-events-none top-0 left-0 z-[1] opacity-0 {{ index == 0 ? " w-[37.5rem] h-[37.5rem]" : " w-[25rem] h-[25rem]" }}">
+									<img class="object-contain opacity-40" loading="lazy" src="{{ function("webp", "orb-white") }}" alt="moving orb">
+								</div>
+							</div>
+
+							<div class="stat black" data-key="roi">
+								<div class="stat-inner">
+									<h2>
+										<span class="amount">0</span>%</h2>
+									<p>{{ fields.stat_two_subtext }}</p>
+								</div>
+
+								<div class="orb absolute pointer-events-none top-0 left-0 z-[1] opacity-0 {{ index == 0 ? " w-[37.5rem] h-[37.5rem]" : " w-[25rem] h-[25rem]" }}">
+									<img class="object-contain opacity-40" loading="lazy" src="{{ function("webp", "orb-white") }}" alt="moving orb">
+								</div>
+							</div>
+
+							<div class="stat green" data-key="net_present_value">
+								<div class="stat-inner">
+									<h2>$<span class="amount">0</span>
+									</h2>
+									<p>{{ fields.stat_three_subtext }}</p>
+								</div>
+
+								<div class="orb absolute pointer-events-none top-0 left-0 z-[1] opacity-0 {{ index == 0 ? " w-[37.5rem] h-[37.5rem]" : " w-[25rem] h-[25rem]" }}">
+									<img class="object-contain opacity-40" loading="lazy" src="{{ function("webp", "orb-white") }}" alt="moving orb">
+								</div>
+							</div>
+						</div>
+
+						<div class="grid grid-cols-1 md:grid-cols-2 ~gap-[1.25rem]/[1.5rem]">
+							<div class="chart one">
+								<p class="lg">{{ fields.graph_one_title_text }}</p>
+								<div class="chart-inner"></div>
+							</div>
+
+							<div class="chart two">
+								<p class="lg">{{ fields.graph_two_title_text }}</p>
+
+								<div class="chart-select">
+									<p>{{ fields.graph_two_term_text }}</p>
+
+									<div class="jselect terms">
+										<select>
+											{% for term in terms %}
+												<option value="{{ term }}" {{ term == 60 ? "selected" }}>{{ term }} {{ fields.graph_two_term_suffix_text }}</option>
+											{% endfor %}
+										</select>
+
+										<svg lass="w-[1.25rem] h-[1.25rem]" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+											<rect x="2" y="3" width="16" height="16" stroke="#262626" stroke-linejoin="round"/>
+											<path d="M2 9H18" stroke="#262626"/>
+											<path d="M6 1V5M14 1V5" stroke="#262626"/>
+										</svg>
+									</div>
+								</div>
+
+								<div class="chart-inner"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			{% if fields.disclaimer %}
+				<p class="sm text-black-60 max-w-[48.375rem]">{{ fields.disclaimer }}</p>
+			{% endif %}
+		</div>
+	</div>
+
+	<div class="absolute bottom-[-0.25rem] w-full center-x min-w-[90rem]">
+		<div class="lottie" data-json="{{ function("json", "lottie/green-trail-on-light") }}"></div>
+	</div>
+</section>

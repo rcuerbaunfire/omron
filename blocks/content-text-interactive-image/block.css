@@ -1,0 +1,87 @@
+@layer components {
+	.content-text-interactive-image {
+		.diagram-container {
+			@apply w-full h-full absolute top-0 left-0;
+		}
+
+		.point {
+			@apply absolute h-[0.0625rem] w-[0.0625rem];
+
+			&.active {
+                @apply z-[3];
+
+				.point-card {
+					@apply opacity-100 visible;
+				}
+
+                .point-orb {
+                    @apply bg-blue rotate-45 border-blue;
+                }
+    
+                .point-slash-y,
+                .point-slash-x {
+                    @apply bg-white;
+                }
+			}
+
+			&:not(.active) {
+				.point-card {
+					@apply translate-y-[-40%];
+				}
+			}
+		}
+
+		.point-orb {
+			@apply ~w-[1.625rem]/[2.25rem] ~h-[1.625rem]/[2.25rem] left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] absolute flex justify-center items-center rounded-[50%] border-[0.0625rem] border-black bg-white cursor-pointer z-[2];
+			@apply transition-all duration-300 ease-[ease];
+
+            &:hover {
+                @apply bg-blue border-blue;
+
+                .point-slash-y,
+                .point-slash-x {
+                    @apply bg-white;
+                }
+            }
+		}
+
+		.point-slash-y,
+		.point-slash-x {
+			@apply bg-blue absolute center-xy;
+			@apply transition-colors duration-300 ease-[ease];
+		}
+
+		.point-slash-y {
+			@apply ~h-[0.75rem]/[0.875rem] w-[0.0625rem];
+		}
+
+		.point-slash-x {
+			@apply ~w-[0.75rem]/[0.875rem] h-[0.0625rem];
+		}
+
+		.point-card {
+			@apply h-auto w-[18.4375rem] absolute left-[50%] center-y rounded-[0.5rem] overflow-hidden bg-white border-[0.0625rem] border-black z-[1];
+			@apply transition-all opacity-0 invisible duration-300 ease-[ease];
+		}
+
+		.point-card-body {
+			@apply ~px-[1.25rem]/[1.5rem] pb-[1.5rem] pt-[1.375rem] w-full h-auto flex-1 flex-col flex ~gap-[1.25rem]/[1.5rem];
+		}
+
+        .dialog-close {
+            @apply top-[0.75rem] right-[0.75rem] absolute z-[2];
+        }
+
+        dialog {
+            @apply rounded-[0.5rem] overflow-hidden bg-transparent h-full w-full items-center justify-center max-w-[none] max-h-[none];
+
+            &[open] {
+                @apply flex animate-none;
+            }
+
+            .point-card {
+                @apply opacity-100 visible relative !left-0 translate-y-0 top-0 !right-0;
+            }
+        }
+	}
+}

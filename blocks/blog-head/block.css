@@ -1,0 +1,7 @@
+@layer components {
+	.post-head {
+		.main-image {
+			clip-path: inset(0% 0% 0% 0% round 0.5rem);
+		}
+	}
+}

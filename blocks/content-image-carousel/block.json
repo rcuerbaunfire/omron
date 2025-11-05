@@ -1,0 +1,11 @@
+{
+	"name": "content-image-carousel",
+	"title": "Content Image Carousel",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": ["bf-swiper-style"],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page", "product"]
+	}
+}

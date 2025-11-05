@@ -1,0 +1,325 @@
+@layer components {
+	.btn {
+		@apply ~px-[1.25rem]/[1.5rem] py-[0.75rem] rounded-[3.625rem] flex items-center justify-center gap-[0.5rem] w-fit;
+		@apply transition-colors duration-300 ease-[ease];
+
+		&,
+		& * {
+			@apply cursor-pointer;
+		}
+
+		p,
+		svg path {
+			@apply transition-colors duration-300 ease-[ease];
+		}
+
+		svg {
+			@apply h-[0.8125rem] w-[0.8125rem];
+		}
+
+		&.disabled {
+			@apply pointer-events-none;
+		}
+
+		&.nav-cta {
+			@apply bg-blue hover:bg-green;
+
+			p {
+				@apply text-white;
+			}
+
+			&:hover {
+				p {
+					@apply text-black;
+				}
+			}
+		}
+
+		&.has-border:not(.form-btn):not(.blog-btn):not(.post-btn) {
+			@apply bg-transparent border-[0.0625rem];
+
+			&.white {
+				@apply border-white;
+
+				svg path {
+					@apply stroke-white;
+				}
+
+				p {
+					@apply text-white;
+				}
+
+				&:hover {
+					@apply bg-white;
+
+					p {
+						@apply text-black;
+					}
+
+					svg path {
+						@apply stroke-black;
+					}
+				}
+			}
+
+			&.blue {
+				@apply border-blue;
+
+				svg path {
+					@apply stroke-black;
+				}
+
+				p {
+					@apply text-black;
+				}
+
+				&:hover {
+					@apply bg-blue;
+
+					p {
+						@apply text-white;
+					}
+
+					svg path {
+						@apply stroke-white;
+					}
+				}
+			}
+
+			&.disabled {
+				@apply !border-disabled-gray;
+
+				p {
+					@apply !text-disabled-gray;
+				}
+
+				svg path {
+					@apply !stroke-disabled-gray;
+				}
+			}
+		}
+
+		&.filled:not(.form-btn):not(.blog-btn) {
+			&.blue {
+				@apply bg-blue;
+
+				p {
+					@apply text-white;
+				}
+
+				svg path {
+					@apply stroke-white;
+				}
+
+				&:hover {
+					@apply bg-green;
+
+					p {
+						@apply text-black;
+					}
+
+					svg path {
+						@apply stroke-black;
+					}
+				}
+			}
+
+			&.white {
+				@apply bg-white;
+
+				p {
+					@apply text-black;
+				}
+
+				svg path {
+					@apply stroke-black;
+				}
+
+				&:hover {
+					@apply bg-green;
+				}
+			}
+
+			&.disabled {
+				@apply !bg-black-10;
+
+				p {
+					@apply !text-disabled-gray;
+				}
+
+				svg path {
+					@apply !stroke-disabled-gray;
+				}
+			}
+		}
+
+		&.form-btn {
+			@apply p-0 relative;
+
+			svg {
+				@apply absolute center-y left-[1.5rem] z-[2] pointer-events-none;
+			}
+
+			input {
+				@apply pl-[2.8125rem] h-[2.6875rem] pr-[1.5rem] !rounded-[5.5rem];
+				@apply ~text-[1.0625rem]/[1.125rem] font-kh font-normal leading-[105%];
+				@apply transition-colors duration-300 ease-[ease];
+			}
+
+			&.blue {
+				@apply text-white bg-transparent;
+
+				input {
+					@apply bg-blue;
+				}
+
+				&:hover {
+					input {
+						@apply bg-green text-black;
+					}
+
+					svg path {
+						@apply stroke-black;
+					}
+				}
+			}
+
+			&.white {
+				input {
+					@apply bg-white text-black;
+				}
+
+				svg path {
+					@apply stroke-black;
+				}
+
+				&:hover {
+					input {
+						@apply bg-green !text-black;
+					}
+				}
+			}
+
+			&.borderized {
+				input {
+					@apply bg-transparent text-white border-[0.0625rem] border-white;
+				}
+
+				svg {
+					path {
+						@apply stroke-white;
+					}
+				}
+
+				&:hover {
+					input {
+						@apply bg-white text-black;
+					}
+
+					svg path {
+						@apply stroke-black;
+					}
+				}
+
+				&.newsletter {
+					@apply w-full;
+
+					input {
+						@apply !w-full;
+					}
+				}
+			}
+		}
+
+		&.embed-btn {
+			@apply relative;
+
+            .hs-web-interactive-inline,
+            a {
+                @apply absolute top-0 left-0 w-full h-full opacity-0 z-[2];
+            }
+		}
+
+		&.post-btn {
+			@apply p-0 relative;
+
+			svg {
+				@apply absolute center-y left-[1.5rem] z-[2] pointer-events-none;
+			}
+
+			a {
+				@apply flex items-center pl-[2.8125rem] h-[2.6875rem] pr-[1.5rem] !rounded-[5.5rem];
+				@apply !~text-[1.0625rem]/[1.125rem] font-kh font-normal leading-[105%];
+				@apply transition-colors duration-300 ease-[ease];
+			}
+
+			&.filled {
+				&.blue {
+					a {
+						@apply bg-blue text-white;
+					}
+
+					&:hover {
+						a {
+							@apply bg-green text-black;
+						}
+
+						svg path {
+							@apply stroke-black;
+						}
+					}
+				}
+
+				&.white {
+					a {
+						@apply bg-white text-black;
+					}
+
+					svg path {
+						@apply stroke-black;
+					}
+
+					&:hover {
+						a {
+							@apply bg-green;
+						}
+					}
+				}
+			}
+
+			&.has-border {
+				&.blue {
+					a {
+                        @apply border-blue text-black bg-transparent border-[0.0625rem];
+                    }
+
+					svg path {
+						@apply stroke-black;
+					}
+
+					&:hover {
+						a {
+                            @apply bg-blue text-white;
+                        }
+
+						svg path {
+							@apply stroke-white;
+						}
+					}
+				}
+			}
+		}
+
+		&.plain {
+			@apply p-0;
+
+			&.black {
+				svg {
+					path {
+						@apply stroke-black;
+					}
+				}
+			}
+		}
+	}
+}

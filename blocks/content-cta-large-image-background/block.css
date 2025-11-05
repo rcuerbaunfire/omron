@@ -1,0 +1,23 @@
+@layer components {
+	.content-cta-large-image-bg {
+		.box-overlay {
+			@apply bg-[#00000099] md:bg-[#0006];
+		}
+
+        .box {
+            @apply w-full ~px-[1.5rem]/[3rem] ~py-[5rem]/[6rem] flex items-center relative;
+            
+            &.is-big {
+                @apply ~py-[5rem]/[15rem];
+            }
+        }
+
+        .content {
+            @apply md:max-w-[34.0625rem] flex flex-col ~gap-[1.5rem]/[2.25rem] relative z-[3];
+
+            &.is-right {
+                @apply lg:ml-auto;
+            }
+        }
+	}
+}

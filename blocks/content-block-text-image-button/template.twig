@@ -1,0 +1,57 @@
+<section class="{{ block.slug }} bg-{{ fields.bg }} overflow-x-clip overflow-y-visible">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xl" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xl" %}
+
+	<div class="container">
+		<div class="{{ pt }} {{ pb }}">
+			<div class="box alpha flex max-md:flex-col ~gap-[2.25rem]/[8.75rem] rounded-[0.5rem] border-[0.0625rem] border-gray-2 ~px-[1.5rem]/[3rem] ~py-[3rem]/[4rem] items-center">
+				<div class="flex flex-col ~gap-[1.25rem]/[1.5rem] md:flex-1 md:basis-[52.5rem]">
+					{% if fields.cbtib_title %}
+						<p class="lg">{{ fields.cbtib_title }}</p>
+					{% endif %}
+
+                    <h1>{{ fields.bynder_image }}</h1>
+
+					{% if fields.subtexts|length %}
+						{% for item in fields.subtexts %}
+							{% if item.main_text or item.main_text %}
+								<div class="flex flex-col gap-[0.75rem]">
+									{% if item.main_text %}
+										<p class="!font-bold">{{ item.main_text }}</p>
+									{% endif %}
+
+									{% if item.secondary_text %}
+										<p>{{ item.secondary_text }}</p>
+									{% endif %}
+								</div>
+							{% endif %}
+						{% endfor %}
+					{% endif %}
+				</div>
+
+				<div class="flex flex-col gap-[0.75rem] shrink-0 w-auto max-md:w-full">
+                    {% if fields.image %}
+                        <div class="rounded-[0.5rem] overflow-hidden max-md:h-auto md:h-[12rem] border-[0.0625rem] border-gray-2">
+                            {% include 'components/image.twig' with {
+                                'class': 'w-auto',
+                                'image': fields.image,
+                                'size': [270, 192],
+                            } %}
+                        </div>
+                    {% endif %}
+
+					{% include 'components/cta.twig' with {
+                        'class' : 'filled blue',
+                        'cta': fields.cta, 
+                        'icon': true,
+                    } %}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+

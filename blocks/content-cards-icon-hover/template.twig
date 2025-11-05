@@ -1,0 +1,123 @@
+<section class="{{ block.slug }} bg-{{ fields.bg }} overflow-x-clip overflow-y-visible">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xl" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xxl" %}
+
+	<div class="relative z-[2] overflow-hidden">
+		<div class="container">
+			<div class="{{ pt }} {{ pb }}">
+				<div class="flex flex-col ~gap-[2.25rem]/[3rem]">
+					<div class="flex flex-col ~gap-[1.25rem]/[1.5rem]">
+						{% if fields.heading or fields.eyebrow %}
+							<div class="w-full md:max-w-[55.5rem] relative">
+								{% include 'components/heading.twig' with {
+                                    'class': 'main-title',
+                                    'value': fields.heading.value, 
+                                    'type': fields.heading.type != "default" ? fields.heading.type : "h3",
+                                    'has_custom_style': fields.heading.has_custom_style,
+                                    'style': fields.heading.style,
+                                    'insert_eyebrow': fields.eyebrow ? true : false,
+                                    'eyebrow': fields.eyebrow,
+                                    'to_words': true
+                                } %}
+							</div>
+						{% endif %}
+
+						{% include 'components/cta.twig' with {
+                            'class' : 'filled blue',
+                            'cta': fields.cta, 
+                            'icon': true,
+                        } %}
+					</div>
+
+					{% set itemLength = fields.items|length %}
+
+					{% if itemLength %}
+						<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ~gap-[1.25rem]/[1.5rem]">
+							{% for item in fields.items %}
+                                {% set is_valid_link = item.is_clickable and item.title_link %}
+
+                                {% set title = item.ccih_title %}
+                                {% set link_url = "#" %}
+                                {% set link_target = "_self" %}
+
+                                {% if is_valid_link %}
+                                    {% set title = item.title_link.title %}
+                                    {% set link_url = item.title_link.url ?: "#" %}
+                                    {% set link_target = item.title_link.target ?: "_self" %}
+                                {% endif %}
+
+								<{{ is_valid_link ? ('a href="' ~ link_url ~ '" target="' ~ link_target ~ '"') : "div" }} class="item">
+									<div class="flex flex-col ~gap-[1.25rem]/[1.5rem] h-full relative z-[2] overflow-hidden">
+										<div class="flex justify-between ~gap-[1.25rem]/[1.5rem]">
+											{% if item.icon %}
+												<div class="h-[3.5rem] w-[3.5rem]">
+													{% include 'components/image.twig' with {
+                                                        'image': item.icon,
+                                                        'class': 'object-contain',
+                                                        'size': [56, 56],
+                                                    } %}
+												</div>
+											{% endif %}
+
+											<small class="text-[0.75rem] text-white">{{ loop.index <= 9 ? '0' ~ loop.index : loop.index }}</small>
+										</div>
+
+										{% if ((not item.is_clickable and title) or is_valid_link) or item.description %}
+											<div class="item-content">
+												<div class="item-title">
+                                                    {% if title %}
+                                                        <h6 class="item-title text-white">{{ title }}</h6>
+                                                    {% endif %}
+
+                                                    {% if is_valid_link %}
+                                                        <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M10.5 16.5L16.5 10.5L10.5 4.5" stroke="white"/>
+                                                            <path d="M4.5 10.5L16.5 10.5" stroke="white"/>
+                                                        </svg>
+                                                    {% endif %}
+                                                </div>
+
+												{% if item.paragraph %}
+													<p class="item-desc">{{ item.paragraph }}</p>
+												{% endif %}
+											</div>
+										{% endif %}
+									</div>
+
+									<div class="orb absolute pointer-events-none top-0 left-0 z-[1] opacity-0 w-[37.5rem] h-[37.5rem]">
+										<img class="object-contain opacity-40" loading="lazy" src="{{ function("webp", "orb-white") }}" alt="moving orb">
+									</div>
+								</{{ is_valid_link ? "a" : "div" }}>
+
+								{% if itemLength == 6 %}
+									{% if loop.index == 2 %}
+										<div class="spacer max-xl:hidden"></div>
+										<div class="spacer max-xl:hidden"></div>
+									{% endif %}
+								{% else %}
+									{% if loop.index == 3 %}
+										<div class="spacer max-xl:hidden"></div>
+									{% endif %}
+								{% endif %}
+							{% endfor %}
+						</div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{% if fields.override_bg_graphic and fields.bg_graphic %}
+		<div class="parallax absolute ~right-[-12rem]/[3rem] ~top-[0rem]/[2.5rem] pointer-events-none">
+			<img class="~w-[22.875rem]/[25rem] max-h-[37.5rem] h-auto object-contain object-right-top opacity-80" src="{{ function("wp_get_attachment_image_url", fields.bg_graphic, "full") }}" loading="lazy" alt="background graphic">
+		</div>
+	{% else %}
+		<div class="parallax absolute ~right-[-12rem]/[3rem] ~top-[0rem]/[6.375rem] pointer-events-none">
+			<img class="w-[19.875rem] h-[19.5rem] object-contain" src="{{ function("svg", "cards-icon-robot") }}" loading="lazy" alt="background graphic">
+		</div>
+	{% endif %}
+</section>

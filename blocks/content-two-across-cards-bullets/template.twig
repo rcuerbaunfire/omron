@@ -1,0 +1,108 @@
+<section class="{{ block.slug }} bg-{{ fields.bg }}">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xxl" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xxl" %}
+
+	<div class="container">
+		<div class="{{ pt }} {{ pb }} relative z-[2]">
+			<div class="flex flex-col ~gap-[1.5rem]/[2.25rem]">
+				{% if fields.heading or fields.ctacb_eyebrow or fields.ctacb_paragraph or fields.cta %}
+					<div class="flex max-md:flex-col md:items-end justify-between gap-[1.5rem]">
+						{% if fields.heading or fields.ctacb_eyebrow or fields.ctacb_paragraph %}
+							<div class="w-full md:max-w-[48.375rem] flex flex-col ~gap-[1.25rem]/[1.5rem]">
+								{% if fields.heading or fields.ctacb_eyebrow %}
+									{% include 'components/heading.twig' with {
+                                        'class': 'main-title',
+                                        'value': fields.heading.value, 
+                                        'type': fields.heading.type != "default" ? fields.heading.type : "h3",
+                                        'has_custom_style': fields.heading.has_custom_style,
+                                        'style': fields.heading.style,
+                                        'insert_eyebrow': fields.ctacb_eyebrow ? true : false,
+                                        'eyebrow': fields.ctacb_eyebrow,
+                                        'to_words': true
+                                    } %}
+								{% endif %}
+
+								{% if fields.ctacb_paragraph %}
+									<p class="para-desc">{{ fields.ctacb_paragraph }}</p>
+								{% endif %}
+							</div>
+						{% endif %}
+
+						{% include 'components/cta.twig' with {
+                            'class' : 'filled blue',
+                            'cta': fields.cta, 
+                            'icon': true,
+                        } %}
+					</div>
+				{% endif %}
+
+				{% if fields.ctacb_item|length  %}
+					<div class="items {{ fields.ctacb_item|length == "3" ? "is-special" }}">
+						{% for index, item in fields.ctacb_item %}
+							<div class="item">
+								<div class="item-inner">
+                                    <div class="flex flex-col ~gap-[2.25rem]/[3rem]">
+                                        {% if item.ctacb_title %}
+                                            <h4>{{ item.ctacb_title }}</h4>
+                                        {% endif %}
+
+                                        {% if item.ctacb_item_paragraph or item.ctacb_bullets|length %}
+                                            <div class="flex flex-col gap-[0.75rem]">
+                                                {% if item.ctacb_item_paragraph %}
+                                                    <p>{{ item.ctacb_item_paragraph }}</p>
+                                                {% endif %}
+
+                                                {% for bullet in item.ctacb_bullets %}
+                                                    {% if bullet.ctacb_text %}
+                                                        <div class="flex gap-[0.75rem] items-center">
+                                                            <svg width="20" height="21" viewbox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <rect y="0.5" width="20" height="20" fill="#6AFF96"/>
+                                                                <path d="M15.6348 5.6582C15.8235 5.45685 16.1403 5.44621 16.3418 5.63476C16.5431 5.82353 16.5538 6.14032 16.3652 6.3418L8.53222 14.6973L3.66797 10.374C3.46165 10.1906 3.44274 9.87436 3.62597 9.66797C3.80936 9.46166 4.12563 9.44275 4.33203 9.62598L8.46777 13.3018L15.6348 5.6582Z" fill="#262626"/>
+                                                            </svg>
+
+
+                                                            <p>{{ bullet.ctacb_text }}</p>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+
+                                    <div class="orb absolute pointer-events-none top-0 left-0 z-[1] opacity-0 {{ index == 0 ? " w-[37.5rem] h-[37.5rem]" : " w-[25rem] h-[25rem]" }}">
+                                        <img class="object-contain opacity-40" loading="lazy" src="{{ function("webp", "orb-white") }}" alt="moving orb">
+                                    </div>
+                                </div>
+							</div>
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div>
+
+            {% if fields.image %}
+                <div class="parallax max-md:w-full max-md:h-[5.875rem] md:basis-[32.875rem] relative md:self-stretch">
+                    {% include 'components/image.twig' with {
+                        'image': fields.image,
+                        'loading': "eager",
+                        'class': 'w-full md:min-h-[20.375rem] object-top h-auto absolute top-0 left-0 object-contain opacity-40',
+                        'size': [546, 648],
+                    } %}
+                </div>
+            {% endif %}
+		</div>
+
+        {% if fields.override_bg_graphic and fields.bg_graphic %}
+			<div class="parallax absolute ~right-[-18.75rem]/[-6.75rem] top-[6rem] pointer-events-none">
+                <img class="object-contain w-[32.875rem] h-[20.375rem] object-right-top opacity-80" src="{{ function("wp_get_attachment_image_url", fields.bg_graphic, "full") }}" loading="lazy" alt="background graphic">
+			</div>
+		{% else %}
+			<div class="parallax absolute ~right-[-18.75rem]/[-6.75rem] top-[6rem] pointer-events-none">
+				<img class="object-contain w-[32.875rem] h-[20.375rem]" src="{{ function("svg", "robot-triangle") }}" loading="lazy" alt="background graphic">
+			</div>
+		{% endif %}
+	</div>
+</section>

@@ -1,0 +1,11 @@
+{
+	"name": "content-full-width-image-with-text-overlay",
+	"title": "Content Full Width Image with Text Overlay",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": [],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page"]
+	}
+}

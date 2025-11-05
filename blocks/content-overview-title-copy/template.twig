@@ -1,0 +1,43 @@
+<section class="{{ block.slug }} bg-{{ fields.bg }} overflow-y-visible overflow-x-clip z-[3]">
+    {% if block.anchor %}
+        <div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+    {% endif %}
+
+    {% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xxl" %}
+    {% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xxl" %}
+
+    <div class="container relative z-[2]">
+        <div class="{{ pt }} {{ pb }}">
+            <div class="flex max-md:flex-col ~gap-[1.25rem]/[8.625rem] ~px-[0rem]/[7.125rem]">
+                {% if fields.heading %}
+                    <div class="md:basis-[27rem] md:flex-1">
+                        {% include 'components/heading.twig' with {
+                            'class': 'main-title flex-1 h-fit',
+                            'value': fields.heading.value, 
+                            'type': fields.heading.type != "default" ? fields.heading.type : "h4",
+                            'has_custom_style': fields.heading.has_custom_style,
+                            'style': fields.heading.style,
+                            'to_words': true
+                        } %}
+                    </div>
+                {% endif %}
+                
+                
+                {% if fields.paragraph %}
+                    <p class="lg para-desc md:basis-[34.125rem] md:flex-1">{{ fields.paragraph }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    {% if fields.override_bg_graphic and fields.bg_graphic %}
+		<div class="parallax is-overriden absolute left-0 bottom-[-6.25rem] pointer-events-none mix-blend-multiply">
+			<img class="~w-[25.75rem]/[39.375rem] max-h-[25rem] h-auto object-contain object-left-top opacity-80" src="{{ function("wp_get_attachment_image_url", fields.bg_graphic, "full") }}" loading="lazy" alt="background graphic">
+		</div>
+	{% else %}
+		<div class="parallax absolute left-[-6.875rem] bottom-[-2.5rem] pointer-events-none">
+			<img class="~w-[25.75rem]/[39.375rem] ~h-[5.5rem]/[8.6875rem] object-contain" src="{{ function("svg", "stats") }}" loading="lazy" alt="background graphic">
+		</div>
+	{% endif %}
+</section>
+

@@ -1,0 +1,97 @@
+@layer components {
+    .content-accordion-table {
+        .tab {
+            @apply cursor-pointer rounded-[2.8125rem] px-[0.75rem] py-[0.5rem] border-[0.0625rem] border-black;
+            
+            &, p {
+                @apply transition-all duration-300 ease-[ease];
+            }
+
+            &.active,
+            &:hover {
+                @apply bg-blue border-blue;
+
+                p {
+                    @apply text-white;
+                }
+            }
+        }
+        
+        .panel {
+            @apply flex flex-col absolute;
+            @apply invisible opacity-0 translate-x-[-1.5rem];
+
+            &.active {
+                @apply transition-all duration-[400ms] ease-[ease];
+                @apply relative opacity-100 visible translate-x-0;
+            }
+        }
+
+        .acc {
+            @apply border-t-[0.0625rem] border-t-gray-2;
+
+            &.active {
+                .acc-close {
+                    svg path:nth-child(2) {
+                        @apply opacity-0;
+                    }
+                }
+
+                .acc-grid {
+                    &.body {
+                        @apply h-auto;
+
+                        .acc-grid-inner {
+                            @apply opacity-100 visible translate-y-0;
+                            @apply transition-all duration-300 ease-out;
+                        }
+                    }
+                }
+            }
+
+            &:last-child {
+                @apply border-b-[0.0625rem] border-b-gray-2;
+            }
+        }
+
+        .acc-inner {
+            @apply flex ~py-[1.25rem]/[1.5rem] ~gap-[1.25rem]/[1.5rem] max-md:flex-wrap;
+        }
+
+        .acc-content {
+            @apply flex flex-col flex-1 max-md:flex-[100%] max-md:order-3;
+        }
+
+        .acc-grid {
+            @apply relative;
+
+            &.head {
+                @apply py-[1rem];
+            }
+
+            &.body {
+                @apply h-0 overflow-hidden;
+
+                .acc-grid-inner {
+                    @apply ~pt-[0.25rem]/[1.5rem] ~pb-[0rem]/[0.75rem] translate-y-[0.75rem] opacity-0 invisible will-change-transform;
+                }
+            }
+        }
+
+        .acc-grid-inner {
+            @apply ~gap-[1.25rem]/[1.5rem] grid sm:grid-cols-2 xl:grid-cols-4;
+        }
+
+        .acc-close {
+            @apply shrink-0 h-[1.25rem] w-[1.25rem] flex relative top-[1.625rem] cursor-pointer max-md:order-2 max-md:ml-auto;
+
+            svg {
+                @apply w-full h-full;
+
+                path:nth-child(2) {
+                    @apply transition-opacity duration-300 ease-out;
+                }
+            }
+        }
+    }
+}

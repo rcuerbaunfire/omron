@@ -1,0 +1,7 @@
+@layer components {
+    .content-location {
+        .location-group {
+            @apply flex flex-col ~gap-[1.25rem]/[1.5rem];
+        }
+    }
+}

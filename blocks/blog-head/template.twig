@@ -1,0 +1,60 @@
+<section class="{{ block.slug }} overflow-y-visible overflow-x-clip">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	<div class="container">
+		<div class="~pt-[4.5rem]/[5.625rem] relative">
+			<div class="flex flex-col ~gap-[3rem]/[4rem]">
+				<div class="flex flex-col ~gap-[4rem]/[6rem]">
+					{% if back_cta %}
+						{% set link_url = back_cta.url ?: "#" %}
+						{% set link_title = back_cta.title %}
+						{% set link_target = back_cta.target ?: "_self" %}
+
+						<a class="post-back" href="{{ link_url }}" target="{{ link_target }}">
+							<svg width="13" height="13" viewbox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M4.44255 10.375L1.15088 6.94618L4.44254 3.51736" stroke="#262626" stroke-opacity="0.6" stroke-width="1.5" stroke-miterlimit="10"/>
+								<path d="M11.9859 0.500098L11.9859 5.84905C11.9859 6.45472 11.4943 6.94627 10.8887 6.94627L1.01367 6.94627" stroke="#262626" stroke-opacity="0.6" stroke-width="1.5" stroke-miterlimit="10"/>
+							</svg>
+
+							<p>{{ link_title }}</p>
+						</a>
+					{% endif %}
+
+					{% include 'components/heading.twig' with {
+                        'class': 'main-title',
+                        'value': fields.override_blog_title ? fields.title : blog_title, 
+                        'type': "h1",
+                        'has_custom_style': true,
+                        'style': "h2",
+                        'to_words': true
+                    } %}
+				</div>
+
+				<div class="flex flex-col ~gap-[1.25rem]/[1.5rem]">
+					<div class="flex justify-between items-center">
+						{% include 'components/eyebrow.twig' with { 'text': function("get_cpt_name", function("get_post_type")) } %}
+                        
+                        {% if function("get_language", true) == "English" %}
+						    {% include 'components/eyebrow.twig' with { 'text': blog_publish_date|date("n/j/Y") } %}
+                        {% else %}
+						    {% include 'components/eyebrow.twig' with { 'text': blog_publish_date|date("j/n/Y") } %}
+                        {% endif %}
+					</div>
+
+                    {# ~h-[9.6875rem]/[42.875rem] 2xl:h-auto 2xl:aspect-video #}
+					<div class="~h-[10rem]/[42.875rem] w-[104vw] relative center-x">
+						{% include 'components/image.twig' with {
+                            'image': (fields.override_blog_feature_image and fields.custom_blog_feature_image) ? fields.custom_blog_feature_image : blog_thumbnail,
+                            'loading': "eager",
+                            'class': "main-image rounded-[0.5rem] overflow-hidden absolute center-xy w-full h-full object-cover",
+                            'size': "full",
+                        } %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+

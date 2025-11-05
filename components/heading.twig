@@ -1,0 +1,9 @@
+{% if value %}
+    {% if to_words == true %}
+        {% set words = value|split(' ') %}
+    {% endif %}
+    
+    {% set heading_tag = type ?: 'h1' %}
+
+    <{{ heading_tag }} class="{{ class }} {{ has_custom_style ? style }} {{ to_words ? "flex flex-wrap" }}">{% if to_words %}{% if insert_eyebrow %}{% include 'components/eyebrow.twig' with { 'class' : "shrink-0 align-top h-fit relative pt-[0.75rem] tracking-[normal] max-sm:w-full pb-[0.75rem]", 'text': eyebrow } %}<span class="max-sm:hidden w-[5rem]"></span>{% else %}{% endif %}{% for word in words %}<span class="outer-word"><span class="inner-word">{{ word }}&nbsp;</span></span>{% endfor %}{% else %}{{ value }}{% endif %}</{{ heading_tag }}>
+{% endif %}

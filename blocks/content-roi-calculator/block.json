@@ -1,0 +1,11 @@
+{
+	"name": "content-roi-calculator",
+	"title": "Content ROI Calculator",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": ["bf-jquery-ui-style"],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page"]
+	}
+}

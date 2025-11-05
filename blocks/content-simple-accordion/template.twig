@@ -1,0 +1,68 @@
+<section class="{{ block.slug }} bg-{{ fields.bg }}">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xl" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xl" %}
+
+	<div class="container">
+		<div class="{{ pt }} {{ pb }}">
+			<div class="flex flex-col ~gap-[1.5rem]/[2.25rem]">
+				{% include 'components/heading.twig' with {
+                    'class': 'main-title',
+                    'value': fields.heading.value, 
+                    'type': fields.heading.type != "default" ? fields.heading.type : "h3",
+                    'has_custom_style': fields.heading.has_custom_style,
+                    'style': fields.heading.style,
+                    'to_words': true
+                } %}
+
+				{% if fields.tabs|length %}
+					<div class="flex gap-[0.75rem] flex-wrap">
+						{% for tab in fields.tabs %}
+							<div class="tab" data-index="{{ loop.index }}">
+                                <p>{{ tab.csp_title  }}</p>
+							</div>
+						{% endfor %}
+					</div>
+
+					<div class="relative">
+						{% for tab in fields.tabs %}
+							<div class="panel" data-index="{{ loop.index }}">
+								{% if tab.items|length %}
+									{% for item in tab.items %}
+										<div class="acc">
+											<div class="acc-head">
+												<p class="lg">{{ item.csp_items_title }}</p>
+												<svg class="shrink-0 h-[1.25rem] w-[1.25rem]" width="20" height="21" viewbox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+													<path d="M1 10.5H19" stroke="#262626"/>
+													<path d="M10 19.5L10 1.5" stroke="#262626"/>
+												</svg>
+											</div>
+											<div class="acc-body">
+												<div class="acc-body-inner">
+													<div class="w-full flex flex-col ~gap-[1.25rem]/[1.5rem]">
+														{% if item.paragraph %}
+															<div class="rich-text">{{ item.paragraph }}</div>
+														{% endif %}
+
+                                                        {% include 'components/cta.twig' with {
+                                                            'class' : 'filled blue',
+                                                            'cta': item.accordion_button_cta, 
+                                                            'icon': true,
+                                                        } %}
+													</div>
+												</div>
+											</div>
+										</div>
+									{% endfor %}
+								{% endif %}
+							</div>
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</section>

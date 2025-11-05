@@ -1,0 +1,228 @@
+<footer class="footer">
+	<div class="container">
+		<div class="footer__pre st-xl">
+			<div class="footer__pre-inner">
+				<div class="footer__pre-content">
+					{% if prefooter_heading %}
+						{% include 'components/heading.twig' with {
+                            'class': 'footer__pre-heading text-white',
+                            'value': prefooter_heading, 
+                            'type': "h1",
+                            'to_words': true
+                        } %}
+					{% endif %}
+
+					{% include 'components/cta.twig' with {
+                        'class' : 'filled blue',
+                        'cta': prefooter_cta, 
+                        'icon': true,
+                    } %}
+				</div>
+
+				{% if prefooter_media_type == 'image' and prefooter_image %}
+					<div class="footer__media">
+						{% include 'components/image.twig' with {
+                            'image': prefooter_image,
+                            'size': [318, 382],
+                        } %}
+					</div>
+				{% endif %}
+
+				{% if prefooter_media_type == 'video' and prefooter_video %}
+					<div class="footer__media !pointer-events-none">
+						<div class="video-container loading" data-video-id="{{ prefooter_video }}">
+							<div class="overlay"></div>
+						</div>
+					</div>
+				{% endif %}
+			</div>
+
+			<div class="footer__to-top uline uline-light">
+				<p class="text-white">{{ back_to_top }}</p>
+				<svg class="h-[0.8125rem] w-[0.8125rem]" viewbox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<g>
+						<path d="M10.7871 4.53045L7.24536 1.13037L3.7036 4.53045" stroke="white" stroke-width="1.5" stroke-miterlimit="10"/>
+						<path d="M0.588565 12.3229L6.11369 12.3229C6.73931 12.3229 7.24705 11.8151 7.24705 11.1895L7.24705 0.989258" stroke="white" stroke-width="1.5" stroke-miterlimit="10"/>
+					</g>
+				</svg>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="footer__inner">
+			<div class="footer__overview">
+				<a href="{{ function('home_url') }}" class="footer__logo">
+                    {# <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 989.16 277.22">
+                        <g>
+                            <path class="st0" d="M96.17,152.04c-30.86,0-55.87-25.02-55.87-55.87s25.01-55.87,55.87-55.87,55.87,25.02,55.87,55.87-25.01,55.87-55.87,55.87M96.17,192.33c53.11,0,96.16-43.05,96.16-96.17S149.28,0,96.17,0,0,43.05,0,96.16s43.06,96.17,96.17,96.17"/>
+                            <path class="st0" d="M719.88,192.33c-53.11,0-96.16-43.05-96.16-96.16S666.77,0,719.88,0s96.17,43.05,96.17,96.17-43.05,96.16-96.17,96.16M719.88,152.04c30.87,0,55.88-25.02,55.88-55.87s-25.01-55.87-55.88-55.87-55.86,25.02-55.86,55.87,25.01,55.87,55.86,55.87"/>
+                            <path class="st0" d="M213.39,5.84v181.92h40.3V39.38h43.97v148.38h40.3V39.38h15.57c15.68,0,28.39,12.71,28.39,28.4v119.98h40.3v-119.07c0-35.41-28.7-64.12-64.11-64.12h-104.25c-13.6,0-27.09.43-40.47,1.26Z"/>
+                            <path class="st0" d="M835.26,5.84l.02,181.92h40.29V39.38h44.89c15.67,0,28.39,12.71,28.39,28.4v119.98h40.3v-119.07c0-35.41-28.7-64.12-64.12-64.12h-49.51c-13.54,0-26.92.43-40.26,1.26Z"/>
+                            <path class="st0" d="M453.37,5.84v181.92s40.28,0,40.28,0V39.38h47.63c15.68,0,28.39,12.71,28.39,28.4s-12.71,28.39-28.39,28.39h-34.8l62.28,91.59h49.45l-44.83-65.91c21.45-8.59,36.59-29.56,36.59-54.07,0-34.9-28.29-63.2-63.2-63.2h-53.15c-13.53,0-26.94.43-40.26,1.26Z"/>
+                        </g>
+                        <g>
+                            <path class="st0" d="M201.29,256.84v17.27c0,2.07-1.4,3.1-4.06,3.1s-3.91-1.03-3.91-3.1v-45.77c0-1.7,1.18-2.58,3.4-2.58h34.7c15.28,0,22.96,4.13,22.96,12.55v5.46c0,8.19-7.68,12.33-22.96,12.33h-17.64l34.25,15.06c1.55.66,2.21,1.55,2.21,2.88,0,1.92-1.48,3.17-4.06,3.17-1.11,0-1.62-.15-2.81-.74l-42.08-19.64ZM201.29,250.49h30.34c9.89,0,14.77-2.21,14.77-6.72v-5.32c0-4.43-4.87-6.64-14.69-6.64h-29.83c-.37,0-.59.15-.59.52v18.16Z"/>
+                            <path class="st0" d="M303.69,276.85c-14.4,0-21.63-4.72-21.63-14.17v-22.81c0-9.38,7.09-14.1,21.26-14.1h16.46c14.17,0,21.26,4.72,21.26,14.1v22.81c0,9.45-7.23,14.17-21.63,14.17h-15.72ZM333.08,240.01c0-5.46-4.5-8.19-13.44-8.19h-16.17c-8.93,0-13.44,2.73-13.44,8.19v22.44c0,5.54,4.5,8.34,13.58,8.34h15.87c9.08,0,13.58-2.81,13.58-8.34v-22.44Z"/>
+                            <path class="st0" d="M430.6,265.62c0,7.53-6.35,11.22-18.97,11.22h-37.95c-2.29,0-3.54-.96-3.54-2.88v-45.33c0-1.92,1.25-2.88,3.54-2.88h36.76c12.84,0,19.34,4.06,19.34,12.18v4.21c0,3.91-2.07,6.79-6.13,8.79,4.58,2.07,6.94,5.24,6.94,9.52v5.17ZM421.89,238.16c0-4.21-3.76-6.35-11.37-6.35h-31.82c-.37,0-.59.15-.59.52v15.95h33c7.16,0,10.78-1.99,10.78-5.98v-4.13ZM422.63,260.16c0-4.13-3.76-6.2-11.29-6.2h-33.22v16.32c0,.37.22.52.59.52h32.63c7.53,0,11.29-1.92,11.29-5.83v-4.8Z"/>
+                            <path class="st0" d="M480.22,276.85c-14.4,0-21.63-4.72-21.63-14.17v-22.81c0-9.38,7.09-14.1,21.26-14.1h16.46c14.17,0,21.26,4.72,21.26,14.1v22.81c0,9.45-7.23,14.17-21.63,14.17h-15.72ZM509.6,240.01c0-5.46-4.5-8.19-13.44-8.19h-16.17c-8.93,0-13.44,2.73-13.44,8.19v22.44c0,5.54,4.5,8.34,13.58,8.34h15.87c9.08,0,13.58-2.81,13.58-8.34v-22.44Z"/>
+                            <path class="st0" d="M565.79,231.81h-20.15c-2.44,0-3.69-.96-3.69-3.03s1.25-3.03,3.69-3.03h48.21c2.51,0,3.76,1.03,3.76,2.95,0,2.07-1.25,3.1-3.76,3.1h-20.08v42.3c0,2.07-1.33,3.1-3.91,3.1-2.73,0-4.06-1.03-4.06-3.1v-42.3Z"/>
+                            <path class="st0" d="M623.45,228.49c0-2.07,1.4-3.1,4.13-3.1,2.51,0,3.84,1.03,3.84,3.1v45.62c0,2.07-1.4,3.1-4.06,3.1s-3.91-1.03-3.91-3.1v-45.62Z"/>
+                            <path class="st0" d="M682.14,276.85c-14.4,0-21.63-4.72-21.63-14.17v-22.96c0-9.3,7.09-13.95,21.26-13.95h28.27c2.36,0,3.69,1.03,3.69,3.03s-1.33,3.03-3.69,3.03h-28.13c-8.93,0-13.44,2.66-13.44,8.05v22.59c0,5.54,4.58,8.34,14.03,8.34h27.54c2.36,0,3.69,1.03,3.69,3.03s-1.33,3.03-3.69,3.03h-27.9Z"/>
+                            <path class="st0" d="M795.84,265.11c0,7.83-7.53,11.74-22.44,11.74h-29.97c-2.44,0-3.76-1.03-3.76-3.03s1.33-3.03,3.76-3.03h29.97c9.6,0,14.4-2.07,14.4-6.13v-5.24c0-3.99-4.5-5.98-13.66-5.98h-13.95c-13.44,0-20.16-3.69-20.16-10.93v-5.39c0-7.53,6.94-11.37,20.67-11.37h31.45c2.44,0,3.69,1.03,3.69,3.03s-1.25,3.03-3.69,3.03h-31.38c-8.49,0-12.77,1.85-12.77,5.61v4.58c0,3.69,4.06,5.46,12.11,5.46h13.44c14.84,0,22.29,3.91,22.29,11.66v5.98Z"/>
+                        </g>
+                    </svg> #}
+
+                    <svg width="144" height="28" viewBox="0 0 144 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<g clip-path="url(#clip0_6048_38)">
+							<path d="M13.9994 22.0994C9.50702 22.0994 5.86603 18.464 5.86603 13.9783C5.86603 9.49266 9.50702 5.85717 13.9994 5.85717C18.4919 5.85717 22.1329 9.49266 22.1329 13.9783C22.1329 18.464 18.4919 22.0994 13.9994 22.0994ZM13.9994 27.9566C21.7307 27.9566 27.9989 21.6978 27.9989 13.9783C27.9989 6.25877 21.7307 0 13.9994 0C6.26823 0 0 6.25877 0 13.9783C0 21.6978 6.26823 27.9566 13.9994 27.9566Z" fill="white"></path>
+							<path d="M104.8 27.9566C97.069 27.9566 90.8008 21.6978 90.8008 13.9783C90.8008 6.25877 97.069 0 104.8 0C112.531 0 118.8 6.25877 118.8 13.9783C118.8 21.6978 112.531 27.9566 104.8 27.9566ZM104.8 22.0994C109.293 22.0994 112.934 18.464 112.934 13.9783C112.934 9.49266 109.293 5.85717 104.8 5.85717C100.308 5.85717 96.6692 9.49266 96.6692 13.9783C96.6692 18.464 100.31 22.0994 104.8 22.0994Z" fill="white"></path>
+							<path d="M31.0664 0.847827V27.292H36.9348V5.72333H43.3347V27.292H49.2008V5.72333H51.4682C53.752 5.72333 55.6007 7.5716 55.6007 9.84965V27.2897H61.4667V9.98586C61.4667 4.83794 57.2871 0.666992 52.1338 0.666992H36.9583C34.9802 0.666992 33.0139 0.730402 31.0664 0.850176V0.847827Z" fill="white"></path>
+							<path d="M121.597 0.847827L121.601 27.292H127.467V5.72333H134.001C136.283 5.72333 138.134 7.5716 138.134 9.84965V27.2897H144.002V9.98586C144.002 4.83794 139.823 0.666992 134.667 0.666992H127.46C125.487 0.666992 123.542 0.730402 121.599 0.850176L121.597 0.847827Z" fill="white"></path>
+							<path d="M66.001 0.848037V27.2922H71.8647V5.72354H78.8009C81.0847 5.72354 82.9334 7.57181 82.9334 9.84986C82.9334 12.1279 81.0824 13.9762 78.8009 13.9762H73.7345L82.8017 27.2899H90.0014L83.4744 17.708C86.5956 16.4586 88.7995 13.4125 88.7995 9.84751C88.7995 4.77474 84.681 0.660156 79.6006 0.660156H71.8623C69.8936 0.660156 67.9414 0.723566 66.001 0.84334V0.848037Z" fill="white"></path>
+						</g>
+						<defs>
+							<clipPath id="clip0_6048_38">
+								<rect width="144" height="27.9566" fill="white"></rect>
+							</clipPath>
+						</defs>
+					</svg>
+				</a>
+
+				<div class="footer__form">
+					{% include 'components/eyebrow.twig' with {
+                        'text': footer_form_label,
+                        'textClass': 'text-white-60',
+                    } %}
+
+					<div class="footer__form-inner">
+						{% set region = footer_form.region %}
+						{% set form_id = footer_form.form_id %}
+						{% set portal_id = footer_form.portal_id %}
+                        {% set lang_code = function("get_language") %}
+
+                        {% if lang_code != "en" %}
+                            {% set form_id = footer_form["form_id_" ~ lang_code] ?: footer_form.form_id %}
+                        {% endif %}
+
+						{% if region and form_id and portal_id %}
+							<div class="form-container footer-form" data-region="{{ region }}" data-form-id="{{ form_id }}" data-portal-id="{{ portal_id }}"></div>
+						{% endif %}
+					</div>
+				</div>
+
+                <div class="footer__cookie-shortcut desktop">
+                    <!-- OneTrust Cookies Settings button start -->
+                    <button id="ot-sdk-btn" class="ot-sdk-show-settings">Cookie Settings</button>
+                    <!-- OneTrust Cookies Settings button end -->
+                </div>
+			</div>
+
+			{% if primary_footer_nav_columns|length %}
+				<div class="footer__columns">
+					{% for nav_column in primary_footer_nav_columns %}
+						<div class="footer__column">
+							{% for nav_item in nav_column.primary_footer_nav_item %}
+								<div class="footer__group">
+									{% if nav_item.child_nav_item|length %}
+										{% for child in nav_item.child_nav_item %}
+											{% if child.link %}
+												{% set link_url = child.link.url ?: "#" %}
+												{% set link_title = child.link.title %}
+												{% set link_target = child.link.target ?: "_self" %}
+
+												<a class="footer__item uline uline-light" href="{{ link_url }}" target="{{ link_target }}">
+													<p>{{ link_title }}</p>
+												</a>
+											{% endif %}
+										{% endfor %}
+									{% endif %}
+								</div>
+							{% endfor %}
+
+							{% if loop.last %}
+								{% if footer_social|length %}
+									<div class="footer__socials desktop">
+										{% if footer_social_label %}
+											<p class="text-white sm">{{ footer_social_label }}</p>
+										{% endif %}
+
+										<div class="footer__socials-inner">
+											{% for social in footer_social %}
+												{% set social_icon = social.icon %}
+												{% set social_link = social.link ?: "#" %}
+
+												<a href="{{ social_link|lower }}" target="_blank" class="footer__social" rel="nofollow noreferrer noopen">
+													{% include 'components/image.twig' with {
+                                                        'image': social_icon,
+                                                        'class': 'object-contain',
+                                                        'size': "full",
+                                                    } %}
+												</a>
+											{% endfor %}
+										</div>
+									</div>
+								{% endif %}
+							{% endif %}
+						</div>
+					{% endfor %}
+				</div>
+			{% endif %}
+
+			{% if footer_social|length %}
+				<div class="footer__socials mobile">
+					{% if footer_social_label %}
+						<p class="text-white sm">{{ footer_social_label }}</p>
+					{% endif %}
+
+					<div class="footer__socials-inner">
+						{% for social in footer_social %}
+							{% set social_icon = social.icon %}
+							{% set social_link = social.link ?: "#" %}
+
+							<a href="{{ social_link|lower }}" target="_blank" class="footer__social" rel="nofollow noreferrer noopen">
+								{% include 'components/image.twig' with {
+                                    'image': social_icon,
+                                    'class': 'object-contain',
+                                    'size': "full",
+                                } %}
+							</a>
+						{% endfor %}
+					</div>
+				</div>
+			{% endif %}
+
+            <div class="footer__cookie-shortcut mobile">
+                <!-- OneTrust Cookies Settings button start -->
+                <button id="ot-sdk-btn" class="ot-sdk-show-settings">Cookie Settings</button>
+                <!-- OneTrust Cookies Settings button end -->
+            </div>
+		</div>
+	</div>
+
+	<div class="footer__foot">
+		<div class="container">
+			<div class="footer__foot-inner">
+				{% if footer_credits %}
+					<div class="footer__credits">{{ function('do_shortcode', footer_credits) }}</div>
+				{% endif %}
+
+				{% if secondary_footer_nav_item %}
+					<div class="footer__foot-items">
+						{% for nav_item in secondary_footer_nav_item %}
+							{% if nav_item.link %}
+								{% set link_url = nav_item.link.url ?: "#" %}
+								{% set link_title = nav_item.link.title %}
+								{% set link_target = nav_item.link.target ?: "_self" %}
+
+								<a class="footer__item secondary uline uline-light" href="{{ link_url }}" target="{{ link_target }}">
+									<p>{{ link_title }}</p>
+								</a>
+							{% endif %}
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</footer>

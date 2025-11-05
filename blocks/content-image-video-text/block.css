@@ -1,0 +1,37 @@
+@layer components {
+	.content-image-video-text {
+        .media-container {
+            @apply h-full w-full lg:mx-auto relative z-[2] invisible;
+
+            svg {
+                @apply h-full w-full;
+            }
+
+            &.active {
+                @apply visible;
+            }
+        }
+
+        .overlay-outer {
+            @apply h-full;
+        }
+
+		.video-container {
+			@apply h-full w-full relative bg-black overflow-hidden;
+		}
+
+		iframe,
+        video {
+			@apply absolute center-xy h-auto w-auto min-w-full min-h-full aspect-video;
+		}
+
+        .lottie {
+            @apply w-full h-auto center-x min-w-[90rem] relative z-[1];
+
+            svg {
+                @apply !w-auto !h-full min-w-full;
+                clip-path: inset(0% 0% 1rem 0%);
+            }
+        }
+	}
+}

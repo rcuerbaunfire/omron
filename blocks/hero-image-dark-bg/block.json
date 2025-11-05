@@ -1,0 +1,11 @@
+{
+	"name": "hero-image-dark-bg",
+	"title": "Hero Image Dark BG",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": [],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page"]
+	}
+}

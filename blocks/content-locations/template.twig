@@ -1,0 +1,124 @@
+<section class="{{ block.slug }} bg-{{ fields.bg }} overflow-x-clip overflow-y-visible z-[2]">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xxl" %}
+	{% set pb = fields.padding_bottom and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xxl" %}
+
+	{% set arrowBG = fields.bg == 'white' ? '!bg-beige' : '!bg-white' %}
+
+	<div class="container relative z-[2]">
+		<div class="{{ pt }} {{ pb }}">
+			<div class="flex flex-col ~gap-[2.25rem]/[3rem]">
+				<div class="max-w-[55.5rem]">
+					{% if fields.heading or fields.eyebrow %}
+						{% include 'components/heading.twig' with {
+                        'class': 'main-title',
+                        'value': fields.heading.value, 
+                        'type': fields.heading.type != "default" ? fields.heading.type : "h3",
+                        'has_custom_style': fields.heading.has_custom_style,
+                        'style': fields.heading.style,
+                        'insert_eyebrow': fields.eyebrow ? true : false,
+                        'eyebrow': fields.eyebrow,
+                        'to_words': true
+                    } %}
+					{% endif %}
+				</div>
+
+				{% if location_groups|length %}
+					{% for lg in location_groups %}
+						<div class="location-group">
+							{% for location in lg %}
+								{% if location.start_new_group %}
+									<h5>{{ location.location_title }}</h5>
+								{% endif %}
+							{% endfor %}
+
+                            <div class="location-group-inner">
+                                <div class="swiper-container">
+                                    <div class="swiper-wrapper md:!grid md:!grid-cols-2 lg:!grid-cols-3 xl:!grid-cols-4 md:!gap-[1.5rem]">
+                                        {% for location in lg %}
+                                            {% if not location.start_new_group %}
+                                                <div class="swiper-slide !h-auto">
+                                                    <div class="h-full border-[0.0625rem] border-gray-2 p-[0.75rem] rounded-[0.5rem] bg-white flex flex-col gap-[0.75rem]">
+                                                        {% if location.location_image  %}
+                                                            <div class="h-[12.25rem]">
+                                                                {% include 'components/image.twig' with {
+                                                                    'image': location.location_image,
+                                                                    'class': "rounded-[0.5rem]",
+                                                                    'size': "large",
+                                                                } %}
+                                                            </div>
+                                                        {% endif %}
+
+                                                        <div class="flex flex-col gap-[4rem] flex-1">
+                                                            {% if location.location_heading %}
+                                                                <h6>{{ location.location_heading }}</h6>
+                                                            {% endif %}
+
+                                                            <div class="flex flex-col gap-[0.75rem] mt-auto">
+                                                                {% if location.location_details %}
+                                                                    <div class="rich-text">{{ location.location_details }}</div>
+                                                                {% endif %}
+
+                                                                {% if location.telephone %}
+                                                                    <p>
+                                                                        <span>Tel:</span>
+                                                                        {{ location.telephone }}
+                                                                    </p>
+                                                                {% endif %}
+
+                                                                {% if location.telephone_2 %}
+                                                                    <p>
+                                                                        <span>Tel:</span>
+                                                                        {{ location.telephone_2 }}
+                                                                    </p>
+                                                                {% endif %}
+
+                                                                {% if location.fax %}
+                                                                    <p>
+                                                                        <span>Fax:</span>
+                                                                        {{ location.fax }}
+                                                                    </p>
+                                                                {% endif %}
+
+                                                                {% if location.email %}
+                                                                    <a href="mailto:{{ location.email }}" class="text-blue underline">
+                                                                        <p>{{ location.email }}</p>
+                                                                    </a>
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                                <div class="lg:hidden flex shrink-0 gap-[0.75rem] ~mt-[1.25rem]/[1.5rem] max-lg:justify-between">
+                                    <div class="ar-l {{ arrowBG }}">
+                                        <svg width="20" height="21" viewbox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M13 16.1123L7 10.1123L13 4.1123"/>
+                                        </svg>
+                                    </div>
+
+                                    <div class="ar-r {{ arrowBG }}">
+                                        <svg width="20" height="21" viewbox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7 4.1123L13 10.1123L7 16.1123"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+						</div>
+					{% endfor %}
+				{% endif %}
+			</div>
+		</div>
+	</div>
+
+	<div class="parallax absolute ~right-[-12.125rem]/[-6.625rem] ~top-[13rem]/[8.75rem]">
+		<img class="~w-[31.5rem]/[47.375rem] ~h-[31.5rem]/[47.375rem] object-contain" src="{{ function("svg", "globe") }}" loading="lazy" alt="background graphic">
+	</div>
+</section>

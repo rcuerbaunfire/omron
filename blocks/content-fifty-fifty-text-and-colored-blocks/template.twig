@@ -1,0 +1,77 @@
+<section class="{{ block.slug }} bg-{{ fields.bg }}">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xxl" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xxl" %}
+
+	<div class="container">
+		<div class="{{ pt }} {{ pb }}">
+			<div class="inner flex max-md:flex-col {{ fields.is_inverted ? 'md:flex-row-reverse' }} ~gap-[2.25rem]/[8.625rem]">
+				<div class="content md:basis-[34.125rem] md:flex-1 h-fit">
+					<div class="inner-content flex flex-col gap-[6rem] relative will-change-transform">
+						<div class="flex flex-col ~gap-[1.25rem]/[1.5rem]">
+							{% if fields.heading or fields.eyebrow %}
+								{% include 'components/heading.twig' with {
+                                    'class': 'main-title',
+                                    'value': fields.heading.value, 
+                                    'type': fields.heading.type != "default" ? fields.heading.type : "h3",
+                                    'has_custom_style': fields.heading.has_custom_style,
+                                    'style': fields.heading.style,
+                                    'insert_eyebrow': fields.eyebrow ? true : false,
+                                    'eyebrow': fields.eyebrow,
+                                    'to_words': true
+                                } %}
+							{% endif %}
+
+							{% if fields.paragraph %}
+								<p class="para-desc">{{ fields.paragraph }}</p>
+							{% endif %}
+						</div>
+
+						<div class="hidden md:block w-fit {{ fields.is_inverted ? 'ml-auto' }}">
+							{% if fields.override_bg_graphic and fields.bg_graphic %}
+								<img class="w-[22.875rem] h-[16.1875rem] object-contain" src="{{ function("wp_get_attachment_image_url", fields.bg_graphic, "full") }}" loading="lazy" alt="background graphic">
+							{% else %}
+								<img class="w-[22.875rem] h-[16.1875rem] object-contain" src="{{ function("svg", "isolation") }}" loading="lazy" alt="background graphic">
+							{% endif %}
+						</div>
+					</div>
+				</div>
+
+				{% if fields.item|length  %}
+					<div class="flex flex-col ~gap-[1.25rem]/[1.5rem] md:flex-1 md:basis-[41.25rem]">
+						{% for index, item in fields.item %}
+							<div class="item relative flex flex-col gap-[0.5rem] w-full ~pt-[3rem]/[4rem] pb-[2.25rem] ~px-[1.5rem]/[2.25rem] rounded-[0.5rem] overflow-hidden bg-{{ item.bg }}">
+								<div class="flex flex-col gap-[0.75rem] relative z-[2]">
+									{% if item.icon %}
+										<div class="h-[3.5rem] w-[3.5rem]">
+											{% include 'components/image.twig' with {
+                                                'image': item.icon,
+                                                'class': 'object-contain',
+                                                'size': [56, 56],
+                                            } %}
+										</div>
+									{% endif %}
+
+									{% if item.cfftac_title %}
+										<h5 class="{{ item.bg == 'dark-green' ? 'text-black' : 'text-white' }}">{{ item.cfftac_title }}</h5>
+									{% endif %}
+
+									{% if item.paragraph %}
+										<p class="{{ item.bg == 'dark-green' ? 'text-black' : 'text-white' }}">{{ item.paragraph }}</p>
+									{% endif %}
+								</div>
+
+								<div class="orb absolute pointer-events-none top-0 left-0 z-[1] opacity-0 {{ index == 0 ? " w-[37.5rem] h-[37.5rem]" : " w-[25rem] h-[25rem]" }}">
+									<img class="object-contain opacity-40" loading="lazy" src="{{ function("webp", "orb-white") }}" alt="moving orb">
+								</div>
+							</div>
+						{% endfor %}
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</section>

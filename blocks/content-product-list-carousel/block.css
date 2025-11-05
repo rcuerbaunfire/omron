@@ -1,0 +1,39 @@
+@layer components {
+    .content-product-list-carousel {
+        .gradient-overlay {
+			@apply absolute top-0 left-0 w-full h-full z-[2];
+			background: linear-gradient(
+				180deg,
+				rgba(38, 38, 38, 0) 0%,
+				#262626 100%
+			);
+		}
+
+        .item {
+			@apply relative sm:w-[27rem] h-auto;
+
+			&:hover {
+				.item-orb {
+					@apply opacity-100;
+				}
+			}
+		}
+
+		.item-inner {
+			@apply rounded-[0.5rem] overflow-hidden flex flex-col relative z-[2] bg-black h-full;
+		}
+
+		.item-image {
+			@apply relative flex justify-center ~px-[1.25rem]/[1.5rem] ~pt-[2.375rem]/[2.875rem];
+		}
+
+		.item-content {
+			@apply flex flex-1 flex-col ~gap-[1.25rem]/[1.5rem] ~pt-[1.25rem]/[1.625rem] ~px-[1.25rem]/[1.5rem] ~pb-[1.25rem]/[1.5rem] relative z-[2];
+		} 
+        
+		.item-orb {
+			@apply absolute center-xy pointer-events-none z-[1] opacity-70 w-[43.25rem] h-[40.75rem];
+			@apply transition-opacity duration-[600ms] ease-[ease];
+		}
+    }
+}

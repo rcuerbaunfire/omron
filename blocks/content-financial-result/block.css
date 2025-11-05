@@ -1,0 +1,121 @@
+@layer components {
+	.content-financial-result {
+		.graph-container {
+			@apply flex flex-col ~gap-[3rem]/[4rem];
+		}
+
+		.graph-inner {
+			@apply relative;
+
+			&.loading {
+				.graph-contents {
+					@apply invisible opacity-0 translate-y-[1.875rem];
+				}
+			}
+		}
+
+		.graph-contents {
+			@apply transition-all duration-[0.8s] ease-[ease];
+		}
+
+		.robot-current {
+			@apply py-[0.75rem] ~px-[1.25rem]/[1.5rem] flex ~gap-[1.25rem]/[1.5rem] items-center rounded-[0.5rem] border-grey-60 border-[0.0625rem] bg-white md:min-w-[19.6875rem];
+		}
+
+		.stat {
+			@apply relative rounded-[0.5rem] overflow-hidden;
+
+			&.black,
+			&.blue {
+				h2,
+				p {
+					@apply text-white;
+				}
+			}
+
+			&.black {
+				@apply bg-black;
+			}
+
+			&.blue {
+				@apply bg-blue;
+			}
+
+			&.green {
+				@apply bg-green max-lg:col-span-1 max-xl:col-span-2;
+			}
+		}
+
+		.stat-inner {
+			@apply flex ~px-[1.5rem]/[2.25rem] ~pt-[3rem]/[5.5rem] ~pb-[1.5rem]/[2.25rem] flex-col gap-[0.75rem] ~min-h-[0rem]/[14.0625rem] relative z-[2];
+
+			p {
+				@apply mt-auto;
+			}
+		}
+
+		.chart {
+			@apply min-h-[32.75rem] ~py-[1.5rem]/[2.25rem] ~px-[1.5rem]/[5rem] rounded-[0.5rem] bg-beige flex flex-col ~gap-[1.25rem]/[1.5rem];
+
+			& > p {
+				@apply shrink-0;
+			}
+		}
+
+		.chart-select {
+			@apply flex gap-[0.75rem] items-center max-md:flex-col;
+
+			p {
+				@apply w-full md:flex-1;
+			}
+
+			.jselect.terms {
+				@apply w-full md:w-[13rem] shrink-0 border-none;
+
+				.ui-button.ui-selectmenu-button {
+					@apply !rounded-[0.5rem] !w-full !border-gray-2 !border-[0.0625rem] !h-auto !p-[0.75rem] bg-transparent;
+
+					.ui-selectmenu-text {
+						@apply !~text-[1.0625rem]/[1.125rem];
+					}
+				}
+
+                & > svg {
+                    @apply right-[0.75rem];
+                }
+			}
+		}
+
+		.chart-inner {
+			@apply w-full flex-1 mt-auto;
+
+			.apexcharts-canvas {
+				@apply h-full w-full;
+			}
+		}
+
+		.chart-marker {
+			@apply h-[8px] w-[8px] rounded-[1px] inline-block mr-[10px];
+		}
+
+		.chart-tooltip {
+			@apply ~p-[1.25rem]/[1.5rem] min-w-fit gap-[0.75rem] flex flex-col;
+
+			small {
+				@apply text-black-60 font-f-mono leading-[100%] ~text-[0.8125rem]/[14px] uppercase;
+			}
+		}
+
+		.chart-tooltip-item {
+			@apply flex flex-col;
+		}
+
+		.chart-tooltip-eyebrow {
+			@apply flex gap-[0.5rem] items-center pl-[0.125rem];
+		}
+
+		.chart-tooltip-icon {
+			@apply w-[0.5rem] h-[0.5rem] shrink-0;
+		}
+	}
+}

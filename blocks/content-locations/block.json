@@ -1,0 +1,11 @@
+{
+	"name": "content-locations",
+	"title": "Content Location",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": ["bf-swiper-style"],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page"]
+	}
+}

@@ -1,0 +1,11 @@
+{
+	"name": "content-block-text-image-button",
+	"title": "Content Block Text Image Button",
+	"viewScript": ["file:./script.js"],
+	"viewStyle": [],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+		"postTypes": ["page", "product"]
+	}
+}

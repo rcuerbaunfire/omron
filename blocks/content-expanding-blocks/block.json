@@ -1,0 +1,11 @@
+{
+	"name": "content-expanding-blocks",
+	"title": "Content Expanding Blocks",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": [],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page"]
+	}
+}

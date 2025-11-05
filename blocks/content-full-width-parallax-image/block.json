@@ -1,0 +1,11 @@
+{
+	"name": "content-full-width-parallax-image",
+	"title": "Content Full Width Parallax Image",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": [],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page"]
+	}
+}

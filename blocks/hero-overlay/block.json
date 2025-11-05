@@ -1,0 +1,10 @@
+{
+	"name": "hero-overlay",
+	"title": "Hero Overlay",
+	"viewScript": ["file:./script.js"],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+		"postTypes": ["page", "product"]
+	}
+}

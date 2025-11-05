@@ -1,0 +1,165 @@
+@layer base {
+	@font-face {
+		font-family: "kh-teka";
+		src: url("../../fonts/kh-teka/KHTeka-Regular.woff") format("woff");
+		font-weight: normal;
+		font-style: normal;
+		font-display: swap;
+		descent-override: 12%;
+	}
+
+    @font-face {
+		font-family: "kh-teka";
+		src: url("../../fonts/kh-teka/KHTeka-Medium.woff") format("woff");
+		font-weight: 500;
+		font-style: normal;
+		font-display: swap;
+		descent-override: 12%;
+	}
+
+    @font-face {
+		font-family: "kh-teka";
+		src: url("../../fonts/kh-teka/KHTeka-Bold.woff") format("woff");
+		font-weight: 700;
+		font-style: normal;
+		font-display: swap;
+		descent-override: 12%;
+	}
+
+    @font-face {
+		font-family: "f-mono";
+		src: url("../../fonts/favorit-mono/ABCFavoritMono-Regular.woff") format("woff");
+		font-weight: 400;
+		font-style: normal;
+		font-display: swap;
+		descent-override: 15%;
+	}
+
+	h1,
+	.h1 {
+		@apply ~lg/3xl:~text-[3.5rem]/[5rem] font-kh leading-[105%] tracking-[-0.1rem];
+	}
+
+	h2,
+	.h2 {
+		@apply ~text-[3rem]/[4rem] font-kh leading-[105%] tracking-[-0.08rem];
+	}
+
+	h3,
+	.h3 {
+		@apply ~text-[2.5rem]/[3.5rem] leading-[105%] font-kh tracking-[-0.07rem];
+	}
+
+	h4,
+	.h4 {
+		@apply ~text-[2rem]/[3rem] leading-[105%] font-kh tracking-[-0.04rem];
+	}
+
+	h5,
+	.h5 {
+		@apply ~text-[1.5rem]/[2.25rem] font-kh leading-[125%] tracking-[-0.045rem];
+	}
+
+	h6,
+	.h6 {
+		@apply text-[1.5rem] leading-[130%] font-kh;
+	}
+
+	b,
+	strong {
+		@apply font-bold;
+	}
+
+	p {
+		@apply block ~text-[1.0625rem]/[1.125rem] font-kh font-normal leading-[130%];
+
+		&.lg {
+			@apply ~text-[1.25rem]/[1.5rem];
+		}
+
+		&.sm {
+			@apply ~text-[0.9375rem]/[1rem];
+		}
+
+        &.xs {
+			@apply ~text-[0.8125rem]/[0.875rem];
+		}
+	}
+
+	p.button,
+	.btn p {
+		@apply block ~text-[1.0625rem]/[1.125rem] font-kh font-normal leading-[105%];
+	}
+
+	small,
+	.overline {
+		@apply font-f-mono leading-[100%] ~text-[0.8125rem]/[0.875rem] uppercase;
+	}
+
+	a,
+	.link {
+		@apply no-underline text-black;
+	}
+
+	.caption,
+	caption,
+	figcaption {
+		@apply font-kh font-normal text-[0.875rem] leading-[150%];
+	}
+}
+
+@layer components {
+	.rich-text {
+		@apply flex flex-col gap-[0.75rem];
+		@apply ~text-[1.0625rem]/[1.125rem] font-kh font-normal leading-[130%];
+
+        &.xs {
+            &, & * {
+                @apply ~text-[0.8125rem]/[0.875rem];
+            }
+        }
+
+		a:not(.wp-block-button__link) {
+			@apply underline decoration-[0.0625rem] underline-offset-[0.125rem] text-blue;
+		}
+
+		ul,
+		ol {
+			@apply flex flex-col gap-[0.125rem];
+		}
+
+		ul {
+			list-style-type: disc;
+		}
+
+		ol {
+			list-style-type: decimal;
+		}
+
+		ul,
+		ol {
+			@apply ml-[1.75rem];
+		}
+
+		ul ul,
+		ol ul {
+			list-style-type: circle;
+			@apply ml-[1.75rem];
+		}
+
+		ol ol,
+		ul ol {
+			list-style-type: lower-latin;
+			@apply ml-[3.5rem];
+		}
+
+		ul > li {
+			@apply list-none relative;
+
+			&::before {
+				content: "";
+				@apply absolute top-[0.625rem] left-[-1rem] h-[0.25rem] w-[0.25rem] rounded-[50%] bg-black;
+			}
+		}
+	}
+}

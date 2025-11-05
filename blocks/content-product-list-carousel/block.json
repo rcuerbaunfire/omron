@@ -1,0 +1,11 @@
+{
+	"name": "content-product-list-carousel",
+	"title": "Content Product List Carousel",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": ["bf-swiper-style"],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page"]
+	}
+}

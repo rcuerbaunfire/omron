@@ -1,0 +1,43 @@
+.acf-field-bynder-image {
+	.acf-bynder-wrapper {
+		display: flex;
+		gap: 20px;
+		flex-direction: column;
+		width: fit-content;
+
+		.open-bynder {
+			width: fit-content;
+		}
+
+		.bynder-preview {
+			width: 150px;
+			position: relative;
+
+			&:hover {
+				.bynder-preview-remove {
+					opacity: 1;
+				}
+			}
+		}
+
+		.bynder-preview-remove {
+			opacity: 0;
+			transition: all 0.1s ease-in-out;
+			position: absolute;
+			top: 6px;
+			right: 6px;
+			cursor: pointer;
+			will-change: transform;
+
+			&:hover {
+				transform: scale(1.1);
+			}
+		}
+
+		&:has(.bynder-preview-image img) {
+			.open-bynder {
+				display: none;
+			}
+		}
+	}
+}

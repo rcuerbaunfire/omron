@@ -1,0 +1,94 @@
+@layer components {
+	.content-comparison {
+		.table-outer {
+			@apply overflow-y-hidden overflow-x-auto;
+		}
+
+		table {
+			@apply h-[0.0625rem] w-full;
+
+			.cell {
+				@apply p-[0.75rem] h-full bg-white;
+			}
+
+			th,
+			td {
+				@apply text-left table-fixed align-top h-full;
+
+				.cell {
+					@apply flex flex-col gap-[0.625rem];
+				}
+
+				&:not(:first-child) {
+					.cell {
+						@apply items-center text-center;
+					}
+				}
+
+				&:first-child {
+					@apply sticky z-[2] left-0;
+				}
+			}
+
+			th {
+				&:first-child {
+					@apply align-bottom;
+
+					.cell {
+						@apply justify-end;
+					}
+				}
+
+				.cell {
+					@apply border-b-black border-b-[0.0625rem] min-w-[21rem];
+				}
+			}
+
+			td {
+				.cell {
+					@apply border-b-[0.0625rem] border-gray-2;
+					@apply transition-colors duration-300 ease-[ease];
+				}
+			}
+
+			tr {
+				&:hover {
+					td .cell {
+						@apply bg-beige;
+					}
+				}
+			}
+		}
+
+		.swiper-slide {
+            @apply flex flex-col gap-[3rem];
+            
+			.cell {
+				@apply flex flex-col justify-start items-center text-center border-b-[0.0625rem] border-b-gray-2 p-[0.75rem];
+			}
+		}
+
+        .cell-guides {
+            @apply z-[2] absolute top-0 left-0 h-full w-full pointer-events-none;
+        }
+
+        .cell-guide {
+            @apply absolute left-0 h-[3rem] flex items-center opacity-0 transition-opacity duration-300 ease-[ease] translate-y-[-100%] w-full;
+
+            p {
+                @apply overflow-hidden whitespace-nowrap text-ellipsis;
+            }
+
+            &.active {
+                @apply opacity-100;
+            }
+        }
+
+        .ar-l.for-table,
+        .ar-r.for-table {
+            &:not(.scrollable) {
+                /* @apply pointer-events-none opacity-50; */
+            }
+        }
+	}
+}

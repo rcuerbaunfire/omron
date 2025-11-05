@@ -1,0 +1,48 @@
+<section class="{{ block.slug }}">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	<div class="flex flex-col ~gap-[2.25rem]/[6rem]">
+		{% if back_cta %}
+			{% set link_url = back_cta.url ?: "#" %}
+			{% set link_title = back_cta.title %}
+			{% set link_target = back_cta.target ?: "_self" %}
+
+			<a class="post-back" href="{{ link_url }}" target="{{ link_target }}">
+				<svg width="13" height="13" viewbox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M4.44255 10.375L1.15088 6.94618L4.44254 3.51736" stroke="#262626" stroke-opacity="0.6" stroke-width="1.5" stroke-miterlimit="10"/>
+					<path d="M11.9859 0.500098L11.9859 5.84905C11.9859 6.45472 11.4943 6.94627 10.8887 6.94627L1.01367 6.94627" stroke="#262626" stroke-opacity="0.6" stroke-width="1.5" stroke-miterlimit="10"/>
+				</svg>
+
+				<p>{{ link_title }}</p>
+			</a>
+		{% endif %}
+
+		{% set region = fields.hubspot_form.region %}
+		{% set form_id = fields.hubspot_form.form_id %}
+		{% set portal_id = fields.hubspot_form.portal_id %}
+		{% set lang_code = function("get_language") %}
+
+		{% if lang_code != "en" %}
+			{% set form_id = fields.hubspot_form["form_id_" ~ lang_code] ?: fields.hubspot_form.form_id %}
+		{% endif %}
+
+		{% if region and form_id and portal_id %}
+			<div class="form">
+				<div class="form-inner">
+					<div class="flex gap-[0.75rem]">
+						<img class="w-[1.5625rem] h-[1.5625rem] object-contain" src="{{ function("png", "rss") }}" width="25" height="25" loading="lazy" alt="rss">
+						<p class="lg text-white">{{ fields.form_title ?: 'Stay connected' }}</p>
+					</div>
+
+					<div class="form-container blog-footer-form" data-region="{{ region }}" data-form-id="{{ form_id }}" data-portal-id="{{ portal_id }}"></div>
+				</div>
+
+				<div class="form-graphic">
+					<img class="object-contain" src="{{ function("svg", "form-robot") }}" width="218" height="214" loading="lazy" alt="form robot background">
+				</div>
+			</div>
+		{% endif %}
+	</div>
+</section>

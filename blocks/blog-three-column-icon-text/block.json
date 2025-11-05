@@ -1,0 +1,9 @@
+{
+	"name": "blog-three-column-icon-text",
+	"title": "Post Three Column Icon Text",
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["post", "news", "case-study", "training-service"]
+	}
+}

@@ -1,0 +1,11 @@
+{
+	"name": "content-rich-text-form",
+	"title": "Content Rich Text Form",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": [],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page"]
+	}
+}

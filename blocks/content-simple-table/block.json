@@ -1,0 +1,9 @@
+{
+	"name": "content-simple-table",
+	"title": "Content Simple Table",
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page", "product"]
+	}
+}

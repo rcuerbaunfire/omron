@@ -1,0 +1,22 @@
+{# {{ function('dd', fields) }} #}
+{% if fields.code %}
+
+<section class="{{ block.slug }} overflow-clip">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+    
+	<div class="container relative z-[2]">
+		<div class="~pt-[5rem]/[6.25rem] sb-xl">
+            <div class="embed-container loading relative">
+                <div class="overlay"></div>
+                <div class="embed-inner">
+                    {{ fields.code }}
+                </div>
+            </div>
+		</div>
+	</div>
+</section>
+
+
+{% endif %}

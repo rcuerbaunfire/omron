@@ -1,0 +1,81 @@
+<section class="{{ block.slug }} bg-black overflow-hidden">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "~pt-[6.25rem]/[8.875rem]" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xl" %}
+
+	<div class="container relative z-[2]">
+		<div class="{{ pt }} {{ pb }}">
+			<div class="flex ~gap-[3rem]/[4rem] items-center flex-col">
+				<div class="~px-[0rem]/[14.25rem] flex ~gap-[1.25rem]/[4rem] md:items-end relative z-[2] max-md:flex-col">
+					<div class="flex flex-col gap-[0.75rem] md:flex-1 md:basis-[28.5rem]">
+						{% include 'components/eyebrow.twig' with { 'text': fields.eyebrow, 'textClass': 'text-white-60' } %}
+
+						{% include 'components/heading.twig' with {
+                            'class': 'main-title text-white',
+                            'value': fields.heading.value, 
+                            'type': fields.heading.type != "default" ? fields.heading.type : "h3",
+                            'has_custom_style': fields.heading.has_custom_style,
+                            'style': fields.heading.style,
+                            'to_words': true
+                        } %}
+					</div>
+
+					{% if fields.paragraph %}
+						<p class="para-desc md:flex-1 md:basis-[27rem] text-white">{{ fields.paragraph }}</p>
+					{% endif %}
+				</div>
+
+				{% if fields.media_type == "image" %}
+					{% if fields.image %}
+						<div class="media-container-outer image">
+							<div class="media-container">
+								{% include 'components/image.twig' with {
+                                    'image': fields.image,
+                                    'class': 'object-cover h-full w-full',
+                                    'size': [1092, 820],
+                                    'loading': "eager"
+                                } %}
+
+								<div class="orb-container">
+									<img class="orb" src="{{ function("webp", "hero-software-orb") }}" loading="eager" alt="orb background">
+								</div>
+							</div>
+						</div>
+					{% endif %}
+				{% else %}
+					{% if fields.video %}
+						<div class="media-container-outer video">
+							<div class="media-container">
+								<div class="video-box">
+                                    <div class="video-play">
+                                        <small class="text-white uppercase">{{ fields.video_play_text|replace({' ': '<br>'})|raw ?: "Watch now"|replace({' ': '<br>'})|raw }}</small>
+                                    </div>
+
+                                    <div class="video-thumbnail">
+                                        <div class="gradient-overlay"></div>
+                                    </div>
+
+                                    <div class="video-container" data-video-id="{{ fields.video }}"></div>
+                                </div>
+
+								<div class="orb-container">
+									<img class="orb" src="{{ function("webp", "hero-software-orb") }}" loading="eager" alt="orb background">
+								</div>
+							</div>
+						</div>
+					{% endif %}
+				{% endif %}
+			</div>
+		</div>
+	</div>
+
+	<div class="absolute bottom-0 h-auto w-full pointer-events-none z-[1] left-[50%] translate-x-[-50%] scale-y-[-1] min-w-[90rem]">
+		<div class="lottie" data-json="{{ function("json", "lottie/green-trail-dark") }}"></div>
+
+		<div class="h-full w-full absolute top-0 left-0 z-[2]" style="background: linear-gradient(180deg, rgba(38, 38, 38, 0.00) 0%, #262626 100%);"></div>
+	</div>
+</section>
+

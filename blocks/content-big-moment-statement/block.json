@@ -1,0 +1,11 @@
+{
+	"name": "content-big-moment-statement",
+	"title": "Content Big Moment Statement",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": [],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page"]
+	}
+}

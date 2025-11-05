@@ -1,0 +1,121 @@
+<section class="{{ block.slug }} bg-{{ fields.bg }}">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xl" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xl" %}
+
+	<div class="container">
+		<div class="{{ pt }} {{ pb }}">
+			{% if fields.tabs|length %}
+				<div class="flex flex-col gap-[2.25rem]">
+					<div class="flex max-md:flex-col-reverse justify-between ~gap-[2.25rem]/[3rem]">
+						<div class="flex gap-[0.75rem] flex-wrap md:flex-1">
+							{% for tab in fields.tabs %}
+								<div class="tab" data-index="{{ loop.index }}">
+									<p>{{ tab.cat_tab_title }}</p>
+								</div>
+							{% endfor %}
+						</div>
+
+						{% include 'components/cta.twig' with {
+                            'class' : 'filled blue shrink-0',
+                            'cta': fields.cat_cta, 
+                            'icon': true,
+                        } %}
+					</div>
+
+					<div class="relative">
+						{% for tab in fields.tabs %}
+							<div class="panel" data-index="{{ loop.index }}">
+								{% if tab.items|length %}
+									{% for item in tab.items %}
+										<div class="acc">
+											<div class="acc-inner">
+												{% include 'components/image.twig' with {
+                                                    'image': item.image,
+                                                    'class': "w-[6rem] h-[4.625rem] object-contain shrink-0",
+                                                    'size': "medium",
+                                                } %}
+
+                                                <div class="acc-content">
+                                                    {% if item.head_fields|length %}
+                                                        <div class="acc-grid head">
+                                                            <div class="acc-grid-inner">
+                                                                {% for subfield in item.head_fields %}
+                                                                    {% set label = subfield.label %}
+                                                                    {% set type = subfield.type %}
+                                                                    {% set text = subfield.text %}
+                                                                    {% set link = subfield.file %}
+
+                                                                    <div class="flex flex-col gap-[0.25rem]">
+                                                                        {% if label %}
+                                                                            <small class="text-black-60">{{ label }}</small>
+                                                                        {% endif %}
+
+                                                                        {% if type == "choice-text" and text %}
+                                                                            <p class="whitespace-pre-wrap">{{ text }}</p>
+
+                                                                        {% elseif type == "choice-file" and link %}
+                                                                            {% set link_url = link.url ?: "#" %}
+                                                                            {% set link_title = link.title %}
+                                                                            {% set link_target = link.target ?: "_self" %}
+
+                                                                            <a class="w-fit" href="{{ link_url }}" target="{{ link_target }}"><p class="hover:text-blue transition-colors duration-300 ease-in-out underline decoration-[0.0625rem] underline-offset-[0.125rem]">{{ link_title }}</p></a>
+                                                                        {% endif %}
+                                                                    </div>
+                                                                {% endfor %}
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+
+                                                    {% if item.body_fields|length %}
+                                                        <div class="acc-grid body">
+                                                            <div class="acc-grid-inner">
+                                                                {% for subfield in item.body_fields %}
+                                                                    {% set label = subfield.label %}
+                                                                    {% set type = subfield.type %}
+                                                                    {% set text = subfield.text %}
+                                                                    {% set link = subfield.file %}
+
+                                                                    <div class="flex flex-col gap-[0.25rem]">
+                                                                        {% if label %}
+                                                                            <small class="text-black-60">{{ label }}</small>
+                                                                        {% endif %}
+
+                                                                        {% if type == "choice-text" and text %}
+                                                                            <p class="whitespace-pre-wrap">{{ text }}</p>
+
+                                                                        {% elseif type == "choice-file" and link %}
+                                                                            {% set link_url = link.url ?: "#" %}
+                                                                            {% set link_title = link.title %}
+                                                                            {% set link_target = link.target ?: "_self" %}
+
+                                                                            <a class="w-fit" href="{{ link_url }}" target="{{ link_target }}"><p class="hover:text-blue transition-colors duration-200 ease-in-out underline decoration-[0.0625rem] underline-offset-[0.125rem]">{{ link_title }}</p></a>
+                                                                        {% endif %}
+                                                                    </div>
+                                                                {% endfor %}
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                                
+                                                <div class="acc-close">
+                                                    <svg width="20" height="21" viewbox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path class="stroke-[0.0625rem]" d="M1 10.5H19" stroke="#262626"/>
+                                                        <path class="stroke-[0.0625rem]" d="M10 19.5L10 1.5" stroke="#262626"/>
+                                                    </svg>
+                                                </div>
+											</div>
+										</div>
+									{% endfor %}
+								{% endif %}
+							</div>
+						{% endfor %}
+					</div>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+</section>

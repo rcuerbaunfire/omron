@@ -1,0 +1,11 @@
+{
+	"name": "content-map",
+	"title": "Content Map",
+    "viewScript": ["file:./script.js", "bf-mapbox-script"],
+    "viewStyle": ["bf-mapbox-style"],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page"]
+	}
+}

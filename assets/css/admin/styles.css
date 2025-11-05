@@ -1,0 +1,203 @@
+html :where(.wp-block) {
+	max-width: 1440px;
+}
+
+.editor-styles-wrapper {
+	/* background-color: #ffefe6; */
+}
+
+.block-editor .edit-post-layout__metaboxes {
+	border-bottom: 1px solid #ddd;
+	position: relative;
+	top: -1px;
+}
+
+.block-editor .meta-box-sortables.ui-sortable {
+	display: flex;
+	flex-direction: column;
+}
+
+.block-editor .postbox.acf-postbox {
+	order: 1;
+}
+
+.block-editor .postbox:not(.acf-postbox) {
+	order: 2;
+}
+
+.block-editor .acf-postbox .postbox-header h2 {
+	display: flex;
+	justify-content: flex-start;
+	gap: 10px;
+}
+
+.acf-field-wysiwyg
+	.acf-editor-wrap
+	.mce-tinymce:not(.mce-fullscreen)
+	iframe:not(.acf-field-66d8cdba51e67) {
+	height: 150px !important;
+	min-height: 150px;
+}
+
+.acf-field-wysiwyg .acf-editor-wrap.delay textarea {
+	height: 80px !important;
+	min-height: 80px;
+}
+
+body.mce-fullscreen .interface-interface-skeleton__header {
+	z-index: 0;
+}
+
+body.mce-fullscreen
+	.interface-navigable-region.interface-interface-skeleton__secondary-sidebar {
+	z-index: 0;
+}
+
+body.mce-fullscreen
+	.interface-navigable-region.interface-interface-skeleton__sidebar {
+	z-index: -1;
+}
+
+.block-editor-block-icon svg {
+	display: flex;
+}
+
+#adminmenu .wp-menu-image img {
+	opacity: 1;
+}
+
+.block-editor
+	.components-toolbar-group:has(button[aria-label="Switch to Preview"]) {
+	display: none !important;
+}
+
+.block-editor .mce-tinymce.mce-fullscreen {
+	z-index: 9999 !important;
+}
+
+body.post-type-post .form-field.term-description-wrap {
+	display: none !important;
+}
+
+body.taxonomy-resource-category .form-field.term-parent-wrap,
+body.taxonomy-resource-category .form-field.term-description-wrap {
+	display: none !important;
+}
+
+body.post-type-resource
+	.acf-input
+	.acf-taxonomy-field[data-taxonomy="resource-sub-category"]
+	.acf-checkbox-list
+	> li:has(ul.children)
+	> label
+	> input[type="checkbox"] {
+	/* max-width: 0px;
+    overflow: hidden;
+    opacity: 0;
+    margin: 0 !important;
+    width: 0px !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    position: absolute !important;
+    pointer-events: none !important;
+    visibility: hidden !important; */
+	display: none !important;
+}
+
+body.post-type-training-service
+	.acf-input
+	.acf-taxonomy-field[data-taxonomy="training-service-category"]
+	.acf-checkbox-list
+	> li:has(ul.children)
+	> label
+	> input[type="checkbox"] {
+	/* max-width: 0px;
+    overflow: hidden;
+    opacity: 0;
+    margin: 0 !important;
+    width: 0px !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    position: absolute !important;
+    pointer-events: none !important;
+    visibility: hidden !important; */
+	display: none !important;
+}
+
+body.post-type-resource .acf-taxonomy-field .categorychecklist-holder {
+	max-height: unset;
+}
+
+body.post-type-training-service .acf-taxonomy-field .categorychecklist-holder {
+	max-height: unset;
+}
+
+.block-editor
+	.components-button.editor-post-taxonomies__hierarchical-terms-add {
+	/* display: none !important; */
+}
+
+.block-editor
+	.acf-input
+	.acf-taxonomy-field[data-taxonomy="category"]
+	.acf-checkbox-list
+	> li:has(ul.children)
+	> label
+	> input[type="checkbox"] {
+	display: none !important;
+}
+
+.block-editor .wp-block-acf-blog-pull-quote,
+.block-editor .wp-block-acf-blog-three-column-icon-text,
+.block-editor .wp-block-acf-blog-footer-subscribe {
+	max-width: 1000px;
+}
+
+.block-editor-inserter__preview-content-missing {
+	color: white;
+}
+
+.acf-checkbox-list.acf-bl {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.acf-checkbox-list.acf-bl::before,
+.acf-checkbox-list.acf-bl::after {
+	content: none;
+}
+
+.components-button.block-editor-block-types-list__item {
+	height: 100%;
+	justify-content: flex-start;
+}
+
+.block-editor-block-types-list__item-title {
+	flex: 1;
+}
+
+.block-editor-inserter__preview-content-missing {
+	color: transparent;
+}
+
+.acf-field p.description {
+	max-width: 90%;
+}
+
+.column-post_id {
+	width: 70px;
+}
+
+.error.notice.otgs-notice {
+	display: none !important;
+}
+
+.acf-repeater .acf-row .acf-row-handle .acf-icon.-collapse {
+	display: block !important;
+}
+
+.acf-repeater .acf-row.-collapsed .acf-row-handle .acf-icon.-collapse {
+	color: #fff !important;
+	border-color: transparent !important;
+	background-color: #CA3B3B !important;
+}

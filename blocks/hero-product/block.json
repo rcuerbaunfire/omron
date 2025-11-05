@@ -1,0 +1,11 @@
+{
+	"name": "hero-product",
+	"title": "Hero Product",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": [],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["page", "product"]
+	}
+}

@@ -1,0 +1,9 @@
+@layer components {
+    .post-three-column-icon-text {
+        @apply ~my-[1.75rem]/[2.75rem] max-md:hidden;
+
+        & + *:not(p) {
+            @apply !mt-0;
+        }
+    }
+}

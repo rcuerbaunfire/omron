@@ -1,0 +1,114 @@
+<section class="{{ block.slug }} bg-black">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "~pt-[5rem]/[8.125rem]" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "~pb-[5rem]/[8.125rem]" %}
+
+	<div class="container relative z-[2]">
+		<div class="{{ pt }} {{ pb }}">
+			<div class="inner flex max-md:flex-col ~gap-[1.5rem]/[8.625rem] items-center">
+				{% if fields.image or fields.video %}
+					<div class="relative w-full md:basis-[40.25rem] ~h-[24.25rem]/[31.625rem] md:flex-1 pointer-events-none">
+						<div class="media-container {{ fields.media_frame }}">
+							{% if fields.media_frame == "is-tablet" %}
+								<svg viewbox="0 0 2000 1444">
+									<defs>
+										<clipPath id="tabletClip">
+											<polygon points="44,32 1911,32 1956,77 1956,1412 44,1412 44,32"/>
+										</clipPath>
+									</defs>
+
+									<foreignObject x="-75.5952" y="-71.6052" width="2144.91" height="1585.64" clip-path="url(#tabletClip)">
+										<div class="overlay-outer">
+											{% if fields.media_type == "image" %}
+												{% if fields.image %}
+													<img class="w-full h-full object-fill" src="{{ function("wp_get_attachment_image_url", fields.image, "full") }}"/>
+												{% endif %}
+											{% else %}
+												{% if fields.video %}
+													<body xmlns="http://www.w3.org/1999/xhtml" style="margin:0;padding:0;">
+														<div class="video-container relative z-[2]" data-video="{{ fields.video }}"></div>
+													</body>
+												{% endif %}
+											{% endif %}
+										</div>
+									</foreignObject>
+
+									<image loading="lazy" href="{{ function("png", "tablet") }}" x="0" y="0" width="2000" height="1444"/>
+								</svg>
+							{% else %}
+								<svg viewbox="0 0 645 505">
+									<defs>
+										<clipPath id="monitorClip">
+											<polygon points="18.5,435 15,9 637,19 633,392 18.5,435"/>
+										</clipPath>
+									</defs>
+
+									<image loading="lazy" href="{{ function("png", "monitor") }}" x="0" y="0" width="645" height="505"/>
+
+									<foreignObject x="17" y="11" width="622" height="426" clip-path="url(#monitorClip)">
+										<div class="overlay-outer">
+											{% if fields.media_type == "image" %}
+												{% if fields.image %}
+													<img loading="lazy" class="w-full h-full object-fill" src="{{ function("wp_get_attachment_image_url", fields.image, "full") }}"/>
+												{% endif %}
+											{% else %}
+												{% if fields.video %}
+													<body xmlns="http://www.w3.org/1999/xhtml" style="margin:0;padding:0;">
+														<div class="video-container relative z-[2]" data-video="{{ fields.video }}"></div>
+													</body>
+												{% endif %}
+											{% endif %}
+										</div>
+									</foreignObject>
+								</svg>
+							{% endif %}
+
+						</div>
+
+						<div class="orb ~w-[40.625rem]/[68rem] ~h-[40.625rem]/[62.875rem] absolute center-xy z-[1]">
+							<img class="object-contain" src="{{ function("webp", "image-video-orb") }}" loading="lazy" alt="background graphic">
+						</div>
+					</div>
+				{% endif %}
+
+				<div class="flex flex-col md:flex-1 md:basis-[34.125rem] ~gap-[1.25rem]/[1.5rem] h-fit relative">
+					<div class="w-full md:max-w-[62.75rem] relative ~pr-[0rem]/[2.25rem]">
+						{% if fields.heading or fields.eyebrow %}
+							{% include 'components/heading.twig' with {
+                                'class': 'main-title text-white',
+                                'value': fields.heading.value, 
+                                'type': fields.heading.type != "default" ? fields.heading.type : "h3",
+                                'has_custom_style': fields.heading.has_custom_style,
+                                'style': fields.heading.style,
+                                'insert_eyebrow': fields.eyebrow ? true : false,
+                                'eyebrow': fields.eyebrow,
+                                'textClass' : "text-white-60",
+                                'to_words': true
+                            } %}
+						{% endif %}
+					</div>
+
+					{% if fields.paragraph %}
+						<p class="text-white para-desc">{{ fields.paragraph }}</p>
+					{% endif %}
+
+					{% include 'components/cta.twig' with {
+                        'class' : 'filled white',
+                        'cta': fields.cta, 
+                        'icon': true,
+                    } %}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="absolute top-0 left-0 h-auto w-full pointer-events-none z-[1]">
+		<div class="lottie" data-json="{{ function("json", "lottie/green-trail-dark") }}"></div>
+
+		<div class="h-full w-full absolute top-0 left-0 z-[2]" style="background: linear-gradient(180deg, rgba(38, 38, 38, 0.00) 0%, #262626 100%);"></div>
+	</div>
+</section>
+

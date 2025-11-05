@@ -1,0 +1,89 @@
+@layer components {
+	.content-rich-text-form {
+		.form-outer {
+			@apply lg:basis-[41.125rem] lg:flex-1 lg:min-h-[17.375rem] rounded-[0.5rem] ~p-[1.25rem]/[3rem];
+		}
+
+		.form-container-outer {
+			@apply w-full h-full flex flex-col ~gap-[0.75rem]/[2.25rem] relative;
+			@apply invisible overflow-hidden;
+
+			&:has(.hs-form),
+            &:has(.submitted-message) {
+				@apply visible;
+			}
+
+            &:has(.submitted-message) {
+				.form-note {
+                    @apply hidden;
+                }
+			}
+		}
+
+		.form-step {
+			@apply flex flex-col ~gap-[0.75rem]/[2.25rem];
+            @apply transition-all duration-500 ease-[ease];
+
+            &:not(.active) {
+                @apply invisible opacity-0;
+            }
+
+			&.one {
+                &:not(.active) {
+                    @apply translate-x-[-120%] absolute top-0 left-0 w-full h-auto;
+                }
+			}
+
+			&.two {
+				@apply absolute top-0 left-0 w-full h-auto translate-x-[120%];
+
+				& > fieldset {
+					&:nth-child(1),
+					&:nth-child(2) {
+						@apply hidden;
+					}
+				}
+
+                &.active {
+                    @apply translate-x-0 relative;
+                }
+			}
+		}
+
+		.next-btn,
+		.back-btn {
+			@apply hidden;
+		}
+
+		.hs-submit {
+			.actions {
+                @apply flex justify-between gap-[1.25rem];
+
+                .back-btn {
+                    @apply order-2;
+                }
+
+                .next-btn {
+                    @apply order-1;
+                }
+
+                .form-btn {
+                    @apply order-3;
+                }
+
+				.next-btn,
+				.back-btn {
+					@apply flex;
+				}
+                
+                .next-btn,
+                .form-btn,
+                .back-btn {
+                    &:not(.active) {
+                        @apply hidden;
+                    }
+                }
+			}
+		}
+	}
+}

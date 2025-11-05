@@ -1,0 +1,50 @@
+<section class="{{ block.slug }} bg-{{ fields.bg }}">
+	{% if block.anchor %}
+		<div class="section-anchor" id="{{ block.anchor ?? block.id }}"></div>
+	{% endif %}
+
+	{% set pt = fields.padding_top and fields.padding_top != "unset" ? fields.padding_top : "st-xl" %}
+	{% set pb = fields.padding_top and fields.padding_bottom != "unset" ? fields.padding_bottom : "sb-xxl" %}
+
+	<div class="container relative z-[2]">
+		<div class="{{ pt }} {{ pb }}">
+			<div class="box rounded-[0.5rem] overflow-hidden bg-blue relative opacity-0">
+				<div class="flex max-lg:flex-col ~gap-[1.25rem]/[1.5rem] ~p-[1.5rem]/[6rem] relative z-[2]">
+					<div class="lg:basis-[29.25rem] lg:flex-1">
+						{% include 'components/heading.twig' with {
+                            'class': 'main-title text-white',
+                            'value': fields.heading.value, 
+                            'type': fields.heading.type != "default" ? fields.heading.type : "h4",
+                            'has_custom_style': fields.heading.has_custom_style,
+                            'style': fields.heading.style,
+                            'to_words': true
+                        } %}
+					</div>
+
+					{% set region = fields.hubspot_form.region %}
+					{% set form_id = fields.hubspot_form.form_id %}
+					{% set portal_id = fields.hubspot_form.portal_id %}
+					{% set lang_code = function("get_language") %}
+
+					{% if lang_code != "en" %}
+						{% set form_id = fields.hubspot_form["form_id_" ~ lang_code] ?: fields.hubspot_form.form_id %}
+					{% endif %}
+
+					{% if region and form_id and portal_id %}
+						<div class="lg:basis-[41.25rem] lg:flex-1 min-h-[17.375rem]">
+							<div class="form-container schedule-visit" data-region="{{ region }}" data-form-id="{{ form_id }}" data-portal-id="{{ portal_id }}"></div>
+						</div>
+					{% endif %}
+
+					<div class="parallax form-graphic absolute ~left-[7.5625rem]/[5.3125rem] ~bottom-[-1.6875rem]/[-2.625rem] ~w-[9.1875rem]/[16.0625rem] ~h-[11.625rem]/[20.25rem]">
+						<img class="object-contain" src="{{ function("svg", "form-block") }}" width="257" height="324" loading="lazy" alt="form robot background">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="absolute bottom-0 w-full center-x min-w-[90rem]">
+		<div class="lottie" data-json="{{ function("json", "lottie/green-trail-on-light") }}"></div>
+	</div>
+</section>

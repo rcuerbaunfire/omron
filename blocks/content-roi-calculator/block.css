@@ -1,0 +1,343 @@
+@layer components {
+	.content-roi-calculator {
+		.tab {
+			@apply w-fit px-[0.75rem] py-[0.5rem] border-[0.0625rem] border-black cursor-pointer rounded-[2.8125rem];
+
+			&.current {
+				@apply bg-blue border-blue;
+
+				p {
+					@apply text-white;
+				}
+
+                & ~ .tab {
+                    @apply pointer-events-none border-grey-60;
+    
+                    p {
+                        @apply text-grey-60;
+                    }
+                }
+			}
+
+			&,
+			p {
+				@apply transition-all duration-300 ease-[ease];
+			}
+		}
+
+        .panels {
+        }
+
+        .panels-inner {
+            @apply flex transition-transform duration-500 ease-[ease] will-change-transform;
+
+            &:has(.panel[data-step="2"].active) {
+                @apply translate-x-[-100%];
+            }
+
+            &:has(.panel[data-step="3"].active) {
+                @apply translate-x-[-200%];
+            }
+
+            &:has(.panel[data-step="4"].active) {
+                @apply translate-x-[-300%];
+            }
+        }
+
+		.panel {
+			@apply shrink-0 basis-full;
+
+            &.active {
+                .panel-inner {
+                    @apply opacity-100 relative visible;
+                    @apply transition-all duration-500 ease-[ease];
+                }
+            }
+		}
+
+        .panel-inner {
+            @apply flex flex-col gap-[3rem] opacity-0 invisible w-full absolute top-0 left-0;
+        }
+
+        .robot-types-container {
+            @apply bg-beige p-[0.75rem] rounded-[0.5rem] flex gap-[0.75rem] max-md:hidden;
+        }
+
+		.robot-type {
+			@apply flex-1 p-[1.5rem] bg-beige rounded-[0.5rem] cursor-pointer items-center justify-center flex;
+
+			p {
+				@apply relative;
+			}
+
+			.square {
+				@apply absolute left-[-1.25rem] center-y bg-beige h-[0.5rem] w-[0.5rem];
+			}
+
+			&,
+			p,
+			.square {
+				@apply transition-colors duration-300 ease-in-out;
+			}
+
+			&:hover,
+			&.active {
+				@apply bg-blue;
+
+				p {
+					@apply text-white;
+
+					.square {
+						@apply bg-white;
+					}
+				}
+			}
+		}
+
+		.robot-groups {
+			@apply relative;
+		}
+
+		.robot-group {
+			@apply grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-[0.75rem] absolute translate-y-[1.875rem] opacity-0 invisible w-full;
+
+			&.active {
+				@apply visible translate-y-0 opacity-100 relative;
+				@apply transition-all duration-500 ease-[ease];
+			}
+		}
+
+		.robot-child {
+			@apply py-[0.75rem] ~px-[1.25rem]/[1.5rem] flex ~gap-[1.25rem]/[1.5rem] items-center rounded-[0.5rem] border-grey-60 border-[0.0625rem] cursor-pointer relative;
+			@apply transition-all duration-300 ease-[ease];
+
+			&.active,
+			&:hover {
+				@apply border-blue;
+				box-shadow: 0px 0px 55px -10px rgba(18, 99, 255, 0.3);
+			}
+
+			&.active {
+				.robot-check {
+					@apply opacity-100 scale-100;
+				}
+			}
+            
+            &:not(.enabled) {
+                @apply hidden;
+            }
+
+            &.disabled {
+                @apply pointer-events-none opacity-50 cursor-not-allowed;
+            }
+		}
+
+        .robot-children-empty {
+            @apply md:col-span-2 xl:col-span-3 text-center py-[2.5rem] hidden;
+
+            &.active {
+                @apply block;
+            }
+        }
+
+		.robot-check {
+			@apply absolute top-[0.75rem] right-[0.75rem] opacity-0 scale-75;
+			@apply transition-all duration-300 ease-[ease];
+		}
+
+		.robot-current {
+            @apply pointer-events-none;
+		}
+
+		.ffs {
+			@apply grid grid-cols-1 sm:grid-cols-2 ~gap-x-[1.5rem]/[4rem] ~gap-y-[1.5rem]/[3rem];
+		}
+
+		.ff {
+			@apply flex-col gap-[0.75rem] hidden;
+
+			&:has(.ui-slider) {
+				@apply flex;
+			}
+		}
+
+		.ff-head {
+			@apply flex justify-between gap-[0.75rem] items-center;
+		}
+
+		.ff-label {
+			&,
+			& * {
+				@apply cursor-default;
+			}
+		}
+
+		.ff-default {
+			@apply w-[6rem];
+
+			input {
+				@apply px-[0.75rem] ~h-[2.1875rem]/[2.375rem] !rounded-[0.5rem] overflow-hidden border-[0.0625rem] border-gray-2 w-full appearance-none;
+				@apply block ~text-[0.9375rem]/[1rem] font-kh font-normal ~leading-[2.1875rem]/[2.375rem];
+
+				&::-webkit-outer-spin-button,
+				&::-webkit-inner-spin-button {
+					-webkit-appearance: none;
+					margin: 0;
+				}
+
+				& {
+					-moz-appearance: textfield;
+				}
+			}
+		}
+
+		.ff-tooltip {
+			@apply relative flex;
+
+			svg {
+				@apply w-[1rem] h-auto;
+			}
+
+			&:hover {
+				.ff-tooltip-inner {
+					@apply translate-y-[calc(-100%-0.625rem)] opacity-100 visible;
+				}
+			}
+		}
+
+		.ff-tooltip-inner {
+			@apply text-white bg-black absolute px-[0.625rem] py-[0.75rem] ~w-[16.25rem]/[17.5rem] h-auto rounded-[0.25rem] top-0 translate-y-[calc(-100%-1.25rem)] left-[50%] translate-x-[-50%] opacity-0 will-change-transform z-[3] invisible;
+			@apply transition-all duration-300 ease-[ease];
+
+			&::after {
+				content: "";
+				@apply absolute top-full left-[50%] ml-[-0.375rem] border-[0.375rem] border-solid;
+				border-color: black transparent transparent transparent; /* Creates the triangle */
+			}
+		}
+
+		.ff-slider {
+			@apply !h-[0.375rem] !border-none !bg-gray-2 !bg-opacity-30 !rounded-[0.5rem];
+
+			.ui-slider-range-min {
+				@apply !bg-blue !bg-opacity-10 !rounded-[0.5rem];
+			}
+		}
+
+		.ff-slider-lines {
+			@apply pointer-events-none absolute top-0 left-0 w-full h-full flex justify-between opacity-30;
+		}
+
+		.ff-slider-line {
+			@apply h-full w-[0.125rem] bg-gray-2 first:opacity-0 last:opacity-0;
+		}
+
+		.ff-handle {
+			@apply !w-[1rem] !h-[1rem] !rounded-none !bg-transparent !center-y;
+
+			svg {
+				@apply h-full w-full;
+			}
+		}
+
+		.ff-body {
+			@apply flex flex-col gap-[0.75rem];
+		}
+
+		.ff-guides {
+			@apply flex justify-between gap-[1.25rem];
+		}
+
+		.jselect {
+			@apply !border-none;
+    
+            &:has(.ui-selectmenu-button-open) {
+                .jselect-arrow svg {
+                    @apply rotate-[180deg];
+                }
+            }
+
+			&.currency {
+                .ui-button.ui-selectmenu-button {
+                    @apply !pl-[0.75rem] !py-[0.5rem] !border-[0.0625rem] !border-black !rounded-[2.8125rem] !h-fit;
+    
+                    &,
+                    .ui-selectmenu-text {
+                        @apply transition-colors duration-300 ease-[ease];
+                    }
+    
+                    .ui-selectmenu-text {
+                        @apply !text-black pr-[2.375rem] !~text-[0.9375rem]/[1rem] !leading-[105%];;
+                    }
+                }
+    
+                &:hover {
+                    .ui-button.ui-selectmenu-button {
+                        @apply !border-blue bg-blue;
+    
+                        .ui-selectmenu-text {
+                            @apply !text-white;
+                        }
+                    }
+    
+                    .jselect-arrow {
+                        svg {
+                            path {
+                                @apply stroke-white;
+                            }
+                        }
+                    }
+                }
+            }
+
+            &.robot-types {
+                @apply md:hidden;
+
+                .ui-button.ui-selectmenu-button {
+                    @apply !pl-[2.5rem] !py-[0.75rem] !border-none !bg-blue !rounded-[0.5rem] !h-fit;
+    
+                    &,
+                    .ui-selectmenu-text {
+                        @apply transition-colors duration-300 ease-[ease];
+                    }
+    
+                    .ui-selectmenu-text {
+                        @apply !text-white pr-[2.375rem] !~text-[1.0625rem]/[1.125rem] font-kh font-normal !leading-[105%];
+                    }
+                }
+
+                .jselect-arrow {
+                    svg {
+                        path {
+                            @apply stroke-white;
+                        }
+                    }
+                }
+
+                .square {
+                    @apply center-y left-[1.25rem] h-[0.5rem] w-[0.5rem] absolute bg-white;
+                }
+            }
+		}
+
+		.jselect-arrow {
+			@apply absolute top-0 h-full w-[0.5625rem] right-[0.75rem] flex items-center;
+
+			svg {
+				&,
+				path {
+					@apply transition-all duration-300 ease-[ease];
+				}
+			}
+		}
+
+        .view-results {
+            @apply ml-auto w-fit;
+            @apply transition-all duration-300 ease-[ease];
+
+            &:not(.active) {
+                @apply invisible opacity-0 translate-y-[1.25rem];
+            }
+        }
+	}
+}

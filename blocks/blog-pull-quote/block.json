@@ -1,0 +1,11 @@
+{
+	"name": "blog-pull-quote",
+	"title": "Post Pull Quote",
+    "viewScript": ["file:./script.js"],
+    "viewStyle": [],
+	"acf": {
+		"mode": "edit",
+		"renderTemplate": "./controller.php",
+        "postTypes": ["post", "news", "case-study"]
+	}
+}

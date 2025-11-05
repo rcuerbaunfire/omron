@@ -1,0 +1,47 @@
+@layer components {
+	.hero-sticky-scroll {
+		.items {
+			@apply flex ~gap-[3rem]/[8.625rem];
+		}
+
+        .item-content-outer {
+            @apply flex-1 basis-[32.5rem];
+        }
+
+		.item-content {
+			@apply w-full h-full;
+		}
+
+		.item-content-inner {
+			@apply flex flex-col gap-[2.25rem] justify-between lg:max-h-[calc(100vh-15rem)] lg:h-screen;
+		}
+
+		.item-texts-outer {
+			@apply max-lg:gap-[2.25rem] max-lg:grid max-sm:grid-cols-1 max-lg:grid-cols-2 min-h-[15rem];
+		}
+
+		.item-group {
+			@apply relative max-lg:flex max-lg:flex-col max-lg:gap-[1.25rem];
+		}
+
+		.item-thumb {
+			@apply h-[20.875rem] lg:hidden rounded-[0.5rem] overflow-hidden;
+		}
+
+		.item-text {
+			@apply flex flex-col ~gap-[1.25rem]/[1.5rem] lg:absolute lg:top-0 lg:left-0 w-full overflow-hidden lg:opacity-0 lg:pointer-events-none lg:invisible lg:h-0;
+
+			&.active {
+				@apply lg:h-auto lg:pointer-events-auto;
+			}
+		}
+
+		.item-images {
+			@apply flex-1 flex flex-col gap-[7.5rem] basis-[41.25rem] max-lg:hidden;
+		}
+
+		.item-image {
+			@apply rounded-[0.5rem] overflow-hidden relative max-h-[calc(100vh-15rem)] h-screen;
+		}
+	}
+}
